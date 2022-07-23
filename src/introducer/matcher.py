@@ -1,4 +1,4 @@
-from util import ProgrammingError
+from introducer.util import ProgrammingError
 
 
 def find_solution(n_two: int, n_three: int) -> tuple[int, int]:
