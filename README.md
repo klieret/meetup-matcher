@@ -13,6 +13,8 @@
 
 ## 📝 Description
 
+This is a package
+
 ## 📦 Installation
 
 ### Development setup
