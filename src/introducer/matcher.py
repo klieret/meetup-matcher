@@ -1,149 +1,110 @@
+from __future__ import annotations
+
 from dataclasses import dataclass
+from typing import Iterable, TypeVar
 
-from introducer.data import People
-from introducer.util.log import get_logger
+import numpy as np
 
-
-def _find_solution_count(
-    n_two: int, n_three: int, n_two_fixed=0, n_three_fixed=0
-) -> tuple[int, int, int, int]:
-    """
-    Find a solution to the problem of matching people to groups without removing anyone.
-
-    Args:
-        n_two: number of people who prefer groups of two
-        n_three: number of people who prefer groups of three
-        n_two_fixed: number of people with fixed preference to groups of two
-        n_three_fixed: number of people with fixed preference to groups of three
-
-    Returns:
-        (number of people in groups of two, number of people in groups of three)
-    """
-    for move_three_to_two in range(n_three + 1 - n_three_fixed):
-        for move_two_to_three in range(n_two + 1 - n_two_fixed):
-            real_n_two = n_two - move_two_to_three + move_three_to_two
-            real_n_three = n_three + move_two_to_three - move_three_to_two
-            assert real_n_two + real_n_three == n_two + n_three
-            if real_n_two % 2 == 0 and real_n_three % 3 == 0:
-                return real_n_two, real_n_three, move_three_to_two, move_two_to_three
-    raise ValueError("No solution found")
+T = TypeVar("T")
 
 
-def _remove_to_pair(n_remove: int) -> tuple[int, int]:
-    if n_remove % 2 == 0:
-        s = n_remove // 2, n_remove // 2
+class NoSolution(Exception):
+    pass
+
+
+@dataclass
+class ProblemStatement:
+    n_people: int
+    n_notwo: int
+
+    def __post_init__(self):
+        assert self.n_people >= self.n_notwo >= 0
+
+
+@dataclass
+class SolutionNumbers:
+    #: Number of groups of two, three, four
+    partitions: tuple[int, int, int]
+    removed: int = 0
+
+    @property
+    def n_people(self) -> int:
+        return (
+            2 * self.partitions[0]
+            + 3 * self.partitions[1]
+            + 4 * self.partitions[2]
+            + self.removed
+        )
+
+
+def _solve_numeric(ps: ProblemStatement) -> SolutionNumbers:
+    if ps.n_people < 2:
+        raise NoSolution
+    elif ps.n_people == 2:
+        if ps.n_notwo:
+            raise NoSolution
+        else:
+            return SolutionNumbers((1, 0, 0))
+    elif ps.n_people == 3:
+        return SolutionNumbers((0, 1, 0))
+    elif ps.n_people == 4:
+        return SolutionNumbers((0, 0, 1))
+    elif ps.n_people == 5:
+        if ps.n_notwo <= 3:
+            return SolutionNumbers((1, 1, 0))
+        else:
+            return SolutionNumbers((0, 0, 1), removed=1)
+    elif ps.n_people == 6:
+        return SolutionNumbers((0, 2, 0))
+    elif ps.n_people == 7:
+        return SolutionNumbers((0, 1, 1))
+    elif ps.n_people == 8:
+        return SolutionNumbers((0, 0, 2))
     else:
-        s = n_remove // 2, n_remove // 2 + 1
-    assert sum(s) == n_remove
+        s = _solve_numeric(ProblemStatement(ps.n_people - 3, max(0, ps.n_notwo - 3)))
+        assert s.removed == 0
+        return SolutionNumbers((s.partitions[0], s.partitions[1] + 1, s.partitions[2]))
+
+
+def solve_numeric(ps: ProblemStatement) -> SolutionNumbers:
+    s = _solve_numeric(ps)
+    assert s.n_people == ps.n_people
     return s
 
 
-@dataclass
-class SolutionCount:
-    n_two: int
-    n_three: int
-    n_move_two_to_three: int
-    n_move_three_to_two: int
-    n_remove_three_fixed: int
-    n_remove_two_fixed: int
-
-    def __post_init__(self):
-        for v in self.__dataclass_fields__:
-            assert getattr(self, v) >= 0, v
+def sample(
+    source: Iterable[T], n: int, rng: np.random.RandomState | None = None
+) -> set[T]:
+    if rng is None:
+        rng = np.random.RandomState()
+    return set(rng.choice(list(source), size=n, replace=False))
 
 
-def find_solution_count(people: People) -> SolutionCount:
-    for n_remove in range(people.n_preference_fixed()):
-        remove_three, remove_two = _remove_to_pair(n_remove)
-        try:
-            n_two, n_three, move_three_to_two, move_two_to_three = _find_solution_count(
-                people.n_preference(2) - remove_two,
-                people.n_preference(3) - remove_three,
-                people.n_preference_fixed(2) - remove_two,
-                people.n_preference_fixed(3) - remove_three,
-            )
-        except ValueError:
-            continue
-        else:
-            if n_remove:
-                get_logger().warning(f"Had to remove {n_remove} people")
-            return SolutionCount(
-                n_two,
-                n_three,
-                n_move_three_to_two=move_three_to_two,
-                n_move_two_to_three=move_two_to_three,
-                n_remove_two_fixed=remove_two,
-                n_remove_three_fixed=remove_three,
-            )
-    raise ValueError("No solution found")
+def pair_up(
+    sn: SolutionNumbers,
+    idx: set[int],
+    idx_notwo: set[int],
+    rng: np.random.RandomState | None = None,
+) -> tuple[list[set[int]], set[int]]:
+    assert sn.n_people == len(idx) + len(idx_notwo)
 
+    segmentation = []
+    removed = sample(idx_notwo, n=sn.removed, rng=rng)
+    idx_notwo -= removed
+    for i in range(3):
+        group_size = i + 2
+        n_groups = sn.partitions[i]
+        for _ in range(n_groups):
+            if group_size > 2:
+                pool = idx | idx_notwo
+            else:
+                pool = idx
+            new_group = sample(pool, n=group_size, rng=rng)
+            segmentation.append(new_group)
+            idx -= new_group
+            idx_notwo -= new_group
 
-@dataclass
-class Solution:
-    two: list[int]
-    three: list[int]
-    removed: list[int]
-
-    def __post_init__(self):
-        assert len(self.two) % 2 == 0
-        assert len(self.three) % 3 == 0
-
-
-def _find_solution(people: People, sc: SolutionCount) -> Solution:
-    index = people.df.index
-    assert len(set(index)) == len(index)
-    to_be_removed = (
-        people.df.query("(preference == 2) & (fixed == True)")
-        .sample(n=sc.n_remove_two_fixed)
-        .index.to_list()
-    )
-    to_be_removed += (
-        people.df.query("(preference == 3) & (fixed == True)")
-        .sample(n=sc.n_remove_three_fixed)
-        .index.to_list()
-    )
-    remaining = set(index) - set(to_be_removed)
-    pool_for_two = (
-        people.df.loc[remaining]
-        .query("(preference == 3) & (fixed == False)")
-        .sample(n=sc.n_move_three_to_two)
-        .index.to_list()
-    )
-    pool_for_two += (
-        people.df.loc[remaining]
-        .query("preference == 2")
-        .sample(n=sc.n_two - sc.n_move_three_to_two)
-        .index.to_list()
-    )
-    remaining = set(remaining) - set(pool_for_two)
-    pool_for_three = (
-        people.df.loc[remaining]
-        .query("(preference == 2) & (fixed == False)")
-        .sample(n=sc.n_move_two_to_three)
-        .index.to_list()
-    )
-    pool_for_three += (
-        people.df.loc[remaining]
-        .query("preference == 3")
-        .sample(n=sc.n_three - sc.n_move_two_to_three)
-        .index.to_list()
-    )
-    remaining = set(remaining) - set(pool_for_three)
-    assert not remaining
-    return Solution(
-        two=pool_for_two,
-        three=pool_for_three,
-        removed=to_be_removed,
-    )
-
-
-def find_solution(people: People) -> Solution:
-    return _find_solution(people, find_solution_count(people))
-
-
-# class Partitioner:
-#     def __init__(self):
-#         pass
-#
-#     def partition(self, people: list[Person]) -> list[list[Person]]:
-#         pass
+    assert len(idx) == 0, idx
+    assert len(idx_notwo) == 0, idx_notwo
+    assert sum(map(len, segmentation))
+    return segmentation, removed

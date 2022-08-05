@@ -9,7 +9,7 @@ class People:
         self.df = df
 
     def _check_df(self, df: pd.DataFrame):
-        assert df.columns.tolist() == ["name", "email", "slack", "preference", "fixed"]
+        assert df.columns.tolist() == ["name", "email", "slack", "notwo"]
         assert df.preference.isin(self.allowed_preference).all()
         assert df.fixed.isin([True, False]).all()
 
