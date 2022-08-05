@@ -1,0 +1,15 @@
+Dear {{ names | join(', ') }},
+
+you have been matched to a tea time!
+
+Here are your details:
+
+{% for _, p in people.iterrows() -%}
+* {{ p['name'] }} (email: {{ p.email }}{% if p.slack|length %}, slack: {{ p.slack }}{% endif %})
+{% endfor %}
+
+You are now supposed to meet up in the week specified in the invitation.
+Of course you do not have to go out for tea, you can just as well have lunch, take a walk, or anything else you like.
+
+Hope you're having fun!
+Tea-time matcher bot
