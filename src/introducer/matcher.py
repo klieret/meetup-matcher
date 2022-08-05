@@ -15,6 +15,7 @@ class NoSolution(Exception):
 @dataclass
 class ProblemStatement:
     n_people: int
+    #: The number of people who don't want to be in a group of two
     n_notwo: int
 
     def __post_init__(self):
