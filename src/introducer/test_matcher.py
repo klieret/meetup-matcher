@@ -25,13 +25,22 @@ def test_solve_numeric():
 
 def test_solvable():
     for i in range(3, 20):
-        solve_numeric(ProblemStatement(i, i))
+        for fixed in [0, i]:
+            solve_numeric(ProblemStatement(i, fixed))
+    solve_numeric(ProblemStatement(2, 0))
 
 
 def test_not_solvable():
-    for i in range(3):
+    cases = [
+        (0, 0),
+        (1, 0),
+        (1, 1),
+        (2, 1),
+        (2, 2),
+    ]
+    for case in cases:
         with raises(NoSolution):
-            solve_numeric(ProblemStatement(i, i))
+            solve_numeric(ProblemStatement(*case))
 
 
 def test_pair_up():
