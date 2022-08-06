@@ -1,5 +1,5 @@
-import importlib.resources
 from dataclasses import dataclass
+from pathlib import Path
 from typing import Iterator
 
 import pandas as pd
@@ -17,7 +17,8 @@ class Email:
 
 class EmailGenerator:
     def __init__(self):
-        template_path = importlib.resources.path(__package__, "templates")
+        # todo: find a cleaner way to do this
+        template_path = Path(__file__).parent / "templates"
         self.environment = Environment(loader=FileSystemLoader(template_path))
 
     def _generate_remove_email(self, person: pd.Series) -> Email:
@@ -29,6 +30,8 @@ class EmailGenerator:
         )
 
     def _generate_pair_email(self, group: pd.DataFrame) -> Email:
+        print(group)
+        print(group.dtypes)
         template = self.environment.get_template("matched.txt.jinja")
         return Email(
             to=group.email.tolist(),

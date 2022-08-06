@@ -24,3 +24,7 @@ def main():
             print(mail.to, mail.subject, mail.content)
     else:
         raise NotImplementedError
+
+
+if __name__ == "__main__":
+    main()
