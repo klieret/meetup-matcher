@@ -30,8 +30,6 @@ class EmailGenerator:
         )
 
     def _generate_pair_email(self, group: pd.DataFrame) -> Email:
-        print(group)
-        print(group.dtypes)
         template = self.environment.get_template("matched.txt.jinja")
         return Email(
             to=group.email.tolist(),
