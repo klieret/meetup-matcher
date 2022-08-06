@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from introducer.random import get_weeks_since_epoch
+from introducer.pseudorandom import get_weeks_since_epoch
 
 
 def test_get_weeks_since_epoch():
