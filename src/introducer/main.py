@@ -3,8 +3,8 @@ import argparse
 import pandas as pd
 
 from introducer.data import People
-from introducer.mails import EmailGenerator
 from introducer.matcher import ProblemStatement, pair_up, solve_numeric
+from introducer.templating import EmailGenerator
 
 
 def main():
