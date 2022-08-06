@@ -25,11 +25,6 @@ class EmailGenerator:
     def generate_emails(
         self, people: People, partitions: list[set[int]], remove: set[int]
     ) -> list[Email]:
-        # partitions, remove = pair_up(
-        #     solve_numeric(ProblemStatement(len(people), people.df.notwo.sum())),
-        #     set(people.df.index[~people.df.notwo]),
-        #     set(people.df.index[people.df.notwo]),
-        # )
         template_path = importlib.resources.path(__package__, "templates")
         environment = Environment(loader=FileSystemLoader(template_path))
 
