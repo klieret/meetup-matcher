@@ -1,11 +1,16 @@
+import sys
 from dataclasses import dataclass
-from pathlib import Path
 from typing import Iterator
 
 import pandas as pd
 from jinja2 import Environment, FileSystemLoader
 
 from introducer.data import People
+
+if sys.version_info >= (3, 9):
+    from importlib import resources
+else:
+    import importlib_resources as resources
 
 
 @dataclass
@@ -17,9 +22,10 @@ class Email:
 
 class EmailGenerator:
     def __init__(self):
-        # todo: find a cleaner way to do this
-        template_path = Path(__file__).parent / "templates"
-        self.environment = Environment(loader=FileSystemLoader(template_path))
+        template_path = resources.files("introducer") / "templates"
+        self.environment = Environment(
+            loader=FileSystemLoader(template_path)  # type: ignore
+        )
 
     def _generate_remove_email(self, person: pd.Series) -> Email:
         template = self.environment.get_template("removed.txt.jinja")
