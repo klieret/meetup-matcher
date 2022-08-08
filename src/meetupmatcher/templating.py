@@ -5,7 +5,7 @@ from typing import Iterator
 import pandas as pd
 from jinja2 import Environment, FileSystemLoader
 
-from teatimematcher.data import People
+from meetupmatcher.data import People
 
 if sys.version_info >= (3, 9):
     from importlib import resources
@@ -22,7 +22,7 @@ class Email:
 
 class EmailGenerator:
     def __init__(self):
-        template_path = resources.files("teatimematcher") / "templates"
+        template_path = resources.files("meetupmatcher") / "templates"
         self.environment = Environment(
             loader=FileSystemLoader(template_path)  # type: ignore
         )

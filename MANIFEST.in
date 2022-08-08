@@ -1,1 +1,1 @@
-include src/teatimematcher/templates/*.txt.jinja
+include src/meetupmatcher/templates/*.txt.jinja

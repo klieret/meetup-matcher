@@ -2,11 +2,11 @@ import argparse
 
 import pandas as pd
 
-from teatimematcher.data import People
-from teatimematcher.matcher import ProblemStatement, pair_up, solve_numeric
-from teatimematcher.pseudorandom import get_rng_from_option
-from teatimematcher.templating import EmailGenerator
-from teatimematcher.util.log import logger
+from meetupmatcher.data import People
+from meetupmatcher.matcher import ProblemStatement, pair_up, solve_numeric
+from meetupmatcher.pseudorandom import get_rng_from_option
+from meetupmatcher.templating import EmailGenerator
+from meetupmatcher.util.log import logger
 
 
 def main():

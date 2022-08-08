@@ -1,4 +1,4 @@
-from teatimematcher.util.log import logger
+from meetupmatcher.util.log import logger
 
 
 def test_logger():

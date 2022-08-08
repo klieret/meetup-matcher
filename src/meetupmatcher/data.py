@@ -1,6 +1,6 @@
 import pandas as pd
 
-from teatimematcher.util.log import logger
+from meetupmatcher.util.log import logger
 
 
 class People:

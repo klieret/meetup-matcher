@@ -1,7 +1,7 @@
 import numpy as np
 from pytest import raises
 
-from teatimematcher.matcher import (
+from meetupmatcher.matcher import (
     NoSolution,
     ProblemStatement,
     SolutionNumbers,

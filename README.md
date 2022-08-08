@@ -1,13 +1,13 @@
-# Tea time matcher
+# Meetup matcher: Match small groups of people for tea, or whatever
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
-[![gh actions](https://github.com/klieret/tea-time-matcher/workflows/testing/badge.svg)](https://github.com/klieret/tea-time-matcher/actions)
-<!-- [![Coveralls](https://coveralls.io/repos/github/klieret/tea-time-matcher/badge.svg?branch=master)](https://coveralls.io/github/klieret/tea-time-matcher?branch=master) -->
-<!-- [![Documentation Status](https://readthedocs.org/projects/tea-time-matcher/badge/?version=latest)](https://tea-time-matcher.readthedocs.io/) -->
-<!-- [![Pypi status](https://badge.fury.io/py/tea-time-matcher.svg)](https://pypi.org/project/tea-time-matcher/) -->
+[![gh actions](https://github.com/klieret/meetup-matcher/workflows/testing/badge.svg)](https://github.com/klieret/meetup-matcher/actions)
+<!-- [![Coveralls](https://coveralls.io/repos/github/klieret/meetup-matcher/badge.svg?branch=master)](https://coveralls.io/github/klieret/meetup-matcher?branch=master) -->
+<!-- [![Documentation Status](https://readthedocs.org/projects/meetup-matcher/badge/?version=latest)](https://meetup-matcher.readthedocs.io/) -->
+<!-- [![Pypi status](https://badge.fury.io/py/meetup-matcher.svg)](https://pypi.org/project/meetup-matcher/) -->
 [![gitmoji](https://img.shields.io/badge/gitmoji-%20😜%20😍-FFDD67.svg)](https://gitmoji.dev)
-[![License](https://img.shields.io/github/license/klieret/tea-time-matcher.svg)](https://github.com/klieret/tea-time-matcher/blob/master/LICENSE.txt)
+[![License](https://img.shields.io/github/license/klieret/meetup-matcher.svg)](https://github.com/klieret/meetup-matcher/blob/master/LICENSE.txt)
 [![Black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/python/black)
 [![PR welcome](https://img.shields.io/badge/PR-Welcome-%23FF8300.svg)](https://git-scm.com/book/en/v2/GitHub-Contributing-to-a-Project)
 

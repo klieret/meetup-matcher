@@ -4,10 +4,10 @@
   "checkout": null,
   "context": {
     "cookiecutter": {
-      "project_name": "tea-time-matcher",
-      "package_name": "teatimematcher",
+      "project_name": "meetup-matcher",
+      "package_name": "meetupmatcher",
       "description": "This is a package",
-      "url": "https://github.com/klieret/tea-time-matcher",
+      "url": "https://github.com/klieret/meetup-matcher",
       "full_name": "Kilian Lieret",
       "email": "kilian.lieret@posteo.de",
       "maintainer": "Kilian Lieret",
