@@ -1,4 +1,5 @@
 import argparse
+import time
 
 import pandas as pd
 
@@ -27,14 +28,26 @@ def main():
         set(people.df.index[people.df.notwo]),
         rng=rng,
     )
-    mails = EmailGenerator().generate_emails(people, paired_up)
+    mails = list(EmailGenerator().generate_emails(people, paired_up))
     if args.dry_run:
         for mail in mails:
             print(mail.to, mail.subject)
             print(mail.content)
             print("-" * 80)
     else:
-        raise NotImplementedError
+        import getpass
+
+        import yagmail
+
+        logger.warning(f"About to send {len(mails)} emails. This is NOT a dry-run.")
+        username = input("Gmail username: ")
+        pwd = getpass.getpass("Gmail password: ")
+        yag = yagmail.SMTP(username, pwd)
+        for mail in mails:
+            logger.debug(f"Sending email to {mail.to}")
+            yag.send(to=mail.to, subject=mail.subject, contents=mail.content)
+            logger.debug("Sending done. Sleeping for 1 second")
+            time.sleep(1)
 
 
 if __name__ == "__main__":
