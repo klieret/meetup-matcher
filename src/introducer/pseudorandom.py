@@ -18,3 +18,12 @@ def get_random_seed(timestamp: float = None) -> int:
 
 def get_rng(timestamp: float = None):
     return np.random.default_rng(get_random_seed(timestamp=timestamp))
+
+
+def get_rng_from_option(option: str):
+    if option == "week":
+        return get_rng()
+    elif option.isnumeric():
+        return get_rng(int(option))
+    else:
+        raise NotImplementedError(f"Unknown option for the RNG seed: {option}")

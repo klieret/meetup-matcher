@@ -4,6 +4,7 @@ import pandas as pd
 
 from introducer.data import People
 from introducer.matcher import ProblemStatement, pair_up, solve_numeric
+from introducer.pseudorandom import get_rng_from_option
 from introducer.templating import EmailGenerator
 from introducer.util.log import logger
 
@@ -12,7 +13,11 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("-n", "--dry-run", action="store_true")
     parser.add_argument("input", help="Input csv file")
+    parser.add_argument(
+        "--seed", type=str, help="Set the seed for the RNG", default="week"
+    )
     args = parser.parse_args()
+    rng = get_rng_from_option(args.seed)
     people = People(pd.read_csv(args.input))
     solution = solve_numeric(ProblemStatement(len(people), people.df.notwo.sum()))
     logger.info(f"Solution: {solution}")
@@ -20,6 +25,7 @@ def main():
         solution,
         set(people.df.index[~people.df.notwo]),
         set(people.df.index[people.df.notwo]),
+        rng=rng,
     )
     mails = EmailGenerator().generate_emails(people, partitions, remove)
     if args.dry_run:
