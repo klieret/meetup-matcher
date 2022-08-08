@@ -1,4 +1,4 @@
-# Meetup matcher: Match small groups of people for tea, or whatever
+# Match small groups of people for tea, or whatever
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
@@ -13,9 +13,10 @@
 
 ## 📝 Description
 
-This is a package
+
 
 ## 📦 Installation
+
 
 ### Development setup
 
