@@ -1,13 +1,13 @@
-# introducer: Match people for coffee
+# Tea time matcher
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
-[![gh actions](https://github.com/klieret/introducer/workflows/testing/badge.svg)](https://github.com/klieret/introducer/actions)
-<!-- [![Coveralls](https://coveralls.io/repos/github/klieret/introducer/badge.svg?branch=master)](https://coveralls.io/github/klieret/introducer?branch=master) -->
-<!-- [![Documentation Status](https://readthedocs.org/projects/introducer/badge/?version=latest)](https://introducer.readthedocs.io/) -->
-<!-- [![Pypi status](https://badge.fury.io/py/introducer.svg)](https://pypi.org/project/introducer/) -->
+[![gh actions](https://github.com/klieret/tea-time-matcher/workflows/testing/badge.svg)](https://github.com/klieret/tea-time-matcher/actions)
+<!-- [![Coveralls](https://coveralls.io/repos/github/klieret/tea-time-matcher/badge.svg?branch=master)](https://coveralls.io/github/klieret/tea-time-matcher?branch=master) -->
+<!-- [![Documentation Status](https://readthedocs.org/projects/tea-time-matcher/badge/?version=latest)](https://tea-time-matcher.readthedocs.io/) -->
+<!-- [![Pypi status](https://badge.fury.io/py/tea-time-matcher.svg)](https://pypi.org/project/tea-time-matcher/) -->
 [![gitmoji](https://img.shields.io/badge/gitmoji-%20😜%20😍-FFDD67.svg)](https://gitmoji.dev)
-[![License](https://img.shields.io/github/license/klieret/introducer.svg)](https://github.com/klieret/introducer/blob/master/LICENSE.txt)
+[![License](https://img.shields.io/github/license/klieret/tea-time-matcher.svg)](https://github.com/klieret/tea-time-matcher/blob/master/LICENSE.txt)
 [![Black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/python/black)
 [![PR welcome](https://img.shields.io/badge/PR-Welcome-%23FF8300.svg)](https://git-scm.com/book/en/v2/GitHub-Contributing-to-a-Project)
 

@@ -1,7 +1,7 @@
 import numpy as np
 from pytest import raises
 
-from introducer.matcher import (
+from teatimematcher.matcher import (
     NoSolution,
     ProblemStatement,
     SolutionNumbers,

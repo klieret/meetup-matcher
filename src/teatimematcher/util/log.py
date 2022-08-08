@@ -9,7 +9,7 @@ LOG_DEFAULT_LEVEL = logging.DEBUG
 
 def get_logger():
     """Sets up global logger."""
-    _log = colorlog.getLogger("introducer")
+    _log = colorlog.getLogger("TTM")
 
     if _log.handlers:
         # the logger already has handlers attached to it, even though
