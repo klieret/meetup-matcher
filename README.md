@@ -18,8 +18,13 @@ A script to facilitate networking by matching people for meetups in small groups
 This works in three steps:
 
 1. You obtain a list of email addresses of everyone interested
-2. You run this script to match groups of three<sup>[1](#groupsize)</sup> people together and to send them an email
+2. You run this script to match groups of three[^1] people together and to send them an email
 3. Each group decides what to do, and where and when to meet on their own.
+
+[^1]: Of course, depending on the number of people, you cannot have
+all groups having three people. The script will add up to two groups of four people, or,
+if there are very few people, one group of two people. Take a look at `_solve_numeric`
+for the exact algorithm.
 
 ## 📦 Installation
 
@@ -37,13 +42,6 @@ Run
 ```bash
 meetup-matcher your-input.csv
 ```
-
-## Fine print
-
-<a name="groupsize">1</a>: Of course, depending on the number of people, you cannot have
-all groups having three people. The script will add up to two groups of four people, or,
-if there are very few people, one group of two people. Take a look at `_solve_numeric`
-for the exact algorithm.
 
 ## 🧰 Development setup
 
