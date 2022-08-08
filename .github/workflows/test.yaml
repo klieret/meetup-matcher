@@ -24,14 +24,16 @@ jobs:
         run: |
           pytest
       - name: Upload to coveralls
-        run: coveralls --service=github
+        run: |
+          pip3 install --upgrade coveralls
+          coveralls --service=github
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           COVERALLS_PARALLEL: true
 
 
   coveralls:
-    name: Indicate completion to coveralls.io
+    name: Coveralls
     needs: build
     runs-on: ubuntu-latest
     container: python:3-slim
