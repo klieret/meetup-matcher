@@ -6,6 +6,7 @@ import pandas as pd
 from jinja2 import Environment, FileSystemLoader
 
 from meetupmatcher.data import People
+from meetupmatcher.matcher import PairUpResult
 
 if sys.version_info >= (3, 9):
     from importlib import resources
@@ -44,11 +45,11 @@ class EmailGenerator:
         )
 
     def generate_emails(
-        self, people: People, partitions: list[set[int]], remove: set[int]
+        self, people: People, paired_up: PairUpResult
     ) -> Iterator[Email]:
-        for r in remove:
+        for r in paired_up.removed:
             person = people.df.loc[r]
             yield self._generate_remove_email(person)
-        for partition in partitions:
+        for partition in paired_up.segmentation:
             group = people.df.loc[list(partition)]
             yield self._generate_pair_email(group)

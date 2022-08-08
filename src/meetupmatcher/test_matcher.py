@@ -3,6 +3,7 @@ from pytest import raises
 
 from meetupmatcher.matcher import (
     NoSolution,
+    PairUpResult,
     ProblemStatement,
     SolutionNumbers,
     pair_up,
@@ -51,4 +52,4 @@ def test_pair_up():
             4,
         },
         rng=np.random.RandomState(0),
-    ) == ([{2, 3}, {0, 1, 4}], set())
+    ) == PairUpResult([{2, 3}, {0, 1, 4}], set())

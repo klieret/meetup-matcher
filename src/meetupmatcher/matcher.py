@@ -81,12 +81,18 @@ def sample(
     return set(rng.choice(list(source), size=n, replace=False))
 
 
+@dataclass
+class PairUpResult:
+    segmentation: list[set[int]]
+    removed: set[int]
+
+
 def pair_up(
     sn: SolutionNumbers,
     idx: set[int],
     idx_notwo: set[int],
     rng: np.random.RandomState | None = None,
-) -> tuple[list[set[int]], set[int]]:
+) -> PairUpResult:
     assert sn.n_people == len(idx) + len(idx_notwo)
 
     segmentation = []
@@ -108,4 +114,4 @@ def pair_up(
     assert len(idx) == 0, idx
     assert len(idx_notwo) == 0, idx_notwo
     assert sum(map(len, segmentation))
-    return segmentation, removed
+    return PairUpResult(segmentation, removed)

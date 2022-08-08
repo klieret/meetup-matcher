@@ -21,13 +21,13 @@ def main():
     people = People(pd.read_csv(args.input))
     solution = solve_numeric(ProblemStatement(len(people), people.df.notwo.sum()))
     logger.info(f"Solution: {solution}")
-    partitions, remove = pair_up(
+    paired_up = pair_up(
         solution,
         set(people.df.index[~people.df.notwo]),
         set(people.df.index[people.df.notwo]),
         rng=rng,
     )
-    mails = EmailGenerator().generate_emails(people, partitions, remove)
+    mails = EmailGenerator().generate_emails(people, paired_up)
     if args.dry_run:
         for mail in mails:
             print(mail.to, mail.subject)
