@@ -7,7 +7,6 @@
 <!-- [![Pypi status](https://badge.fury.io/py/meetup-matcher.svg)](https://pypi.org/project/meetup-matcher/) -->
 [![gh actions](https://github.com/klieret/meetup-matcher/actions/workflows/test.yaml/badge.svg)](https://github.com/klieret/meetup-matcher/actions)
 [![pre-commit.ci status](https://results.pre-commit.ci/badge/github/klieret/meetup-matcher/main.svg)](https://results.pre-commit.ci/latest/github/klieret/meetup-matcher/main)
-[![Coveralls](https://coveralls.io/repos/github/klieret/meetup-matcher/badge.svg?branch=main)](https://coveralls.io/github/klieret/meetup-matcher?branch=main)
 [![gitmoji](https://img.shields.io/badge/gitmoji-%20😜%20😍-FFDD67.svg)](https://gitmoji.dev)
 [![Black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/python/black)
 [![License](https://img.shields.io/github/license/klieret/meetup-matcher)](https://github.com/klieret/meetup-matcher/blob/master/LICENSE.txt)
