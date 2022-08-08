@@ -10,7 +10,7 @@
 [![Coveralls](https://coveralls.io/repos/github/klieret/meetup-matcher/badge.svg?branch=main)](https://coveralls.io/github/klieret/meetup-matcher?branch=main)
 [![gitmoji](https://img.shields.io/badge/gitmoji-%20😜%20😍-FFDD67.svg)](https://gitmoji.dev)
 [![Black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/python/black)
-[![License](https://img.shields.io/github/license/klieret/meetup-matcher.svg)](https://github.com/klieret/meetup-matcher/blob/master/LICENSE.txt)
+[![License](https://img.shields.io/github/license/klieret/meetup-matcher)](https://github.com/klieret/meetup-matcher/blob/master/LICENSE.txt)
 [![PR welcome](https://img.shields.io/badge/PR-Welcome-%23FF8300.svg)](https://git-scm.com/book/en/v2/GitHub-Contributing-to-a-Project)
 
 A script to facilitate networking by matching people for meetups in small groups.
