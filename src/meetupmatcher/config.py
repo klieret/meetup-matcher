@@ -48,6 +48,8 @@ def find_config(supplied_path: str | PurePath | None = None) -> Path:
 class Config:
     def __init__(self, path: str | PurePath | None):
         data = yaml.load(find_config(path).read_text(), Loader=yaml.SafeLoader)
+        if data is None:
+            data = {}
         self._validate(data)
         self._data = data
 
