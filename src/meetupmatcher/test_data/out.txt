@@ -1,0 +1,135 @@
+To: email8@sdf.x, email9@sdf.x, email11@sdf.x
+Subject: Tea-time pairing
+
+Dear name8, name9, name11,
+
+you have been matched to a tea time!
+
+Here are your details:
+
+* name8 (email: email8@sdf.x, slack: slack8)
+* name9 (email: email9@sdf.x)
+* name11 (email: email11@sdf.x)
+
+
+You are now supposed to meet up in the week specified in the invitation.
+Of course you do not have to go out for tea, you can just as well have lunch, take a walk, or anything else you like.
+
+Hope you're having fun!
+Tea-time matcher bot
+---
+
+The python package that matched you to your group and generated this email
+is available at https://github.com/klieret/meetup-matcher. Fun fact: because the
+pseudorandom number generator is seed with the week number, you can
+also verify the pseudorandomness of your matched group (though you need the
+list of participants for this).
+--------------------------------------------------------------------------------
+To: email0@sdf.x, email14@sdf.x, email15@sdf.x
+Subject: Tea-time pairing
+
+Dear name0, name14, name15,
+
+you have been matched to a tea time!
+
+Here are your details:
+
+* name0 (email: email0@sdf.x, slack: slack0)
+* name14 (email: email14@sdf.x, slack: slack14)
+* name15 (email: email15@sdf.x)
+
+
+You are now supposed to meet up in the week specified in the invitation.
+Of course you do not have to go out for tea, you can just as well have lunch, take a walk, or anything else you like.
+
+Hope you're having fun!
+Tea-time matcher bot
+---
+
+The python package that matched you to your group and generated this email
+is available at https://github.com/klieret/meetup-matcher. Fun fact: because the
+pseudorandom number generator is seed with the week number, you can
+also verify the pseudorandomness of your matched group (though you need the
+list of participants for this).
+--------------------------------------------------------------------------------
+To: email12@sdf.x, email13@sdf.x, email6@sdf.x
+Subject: Tea-time pairing
+
+Dear name12, name13, name6,
+
+you have been matched to a tea time!
+
+Here are your details:
+
+* name12 (email: email12@sdf.x, slack: slack12)
+* name13 (email: email13@sdf.x)
+* name6 (email: email6@sdf.x, slack: slack6)
+
+
+You are now supposed to meet up in the week specified in the invitation.
+Of course you do not have to go out for tea, you can just as well have lunch, take a walk, or anything else you like.
+
+Hope you're having fun!
+Tea-time matcher bot
+---
+
+The python package that matched you to your group and generated this email
+is available at https://github.com/klieret/meetup-matcher. Fun fact: because the
+pseudorandom number generator is seed with the week number, you can
+also verify the pseudorandomness of your matched group (though you need the
+list of participants for this).
+--------------------------------------------------------------------------------
+To: email10@sdf.x, email4@sdf.x, email7@sdf.x
+Subject: Tea-time pairing
+
+Dear name10, name4, name7,
+
+you have been matched to a tea time!
+
+Here are your details:
+
+* name10 (email: email10@sdf.x, slack: slack10)
+* name4 (email: email4@sdf.x, slack: slack4)
+* name7 (email: email7@sdf.x)
+
+
+You are now supposed to meet up in the week specified in the invitation.
+Of course you do not have to go out for tea, you can just as well have lunch, take a walk, or anything else you like.
+
+Hope you're having fun!
+Tea-time matcher bot
+---
+
+The python package that matched you to your group and generated this email
+is available at https://github.com/klieret/meetup-matcher. Fun fact: because the
+pseudorandom number generator is seed with the week number, you can
+also verify the pseudorandomness of your matched group (though you need the
+list of participants for this).
+--------------------------------------------------------------------------------
+To: email1@sdf.x, email2@sdf.x, email3@sdf.x, email5@sdf.x
+Subject: Tea-time pairing
+
+Dear name1, name2, name3, name5,
+
+you have been matched to a tea time!
+
+Here are your details:
+
+* name1 (email: email1@sdf.x)
+* name2 (email: email2@sdf.x, slack: slack2)
+* name3 (email: email3@sdf.x)
+* name5 (email: email5@sdf.x)
+
+
+You are now supposed to meet up in the week specified in the invitation.
+Of course you do not have to go out for tea, you can just as well have lunch, take a walk, or anything else you like.
+
+Hope you're having fun!
+Tea-time matcher bot
+---
+
+The python package that matched you to your group and generated this email
+is available at https://github.com/klieret/meetup-matcher. Fun fact: because the
+pseudorandom number generator is seed with the week number, you can
+also verify the pseudorandomness of your matched group (though you need the
+list of participants for this).

@@ -1,1 +1,2 @@
 include src/meetupmatcher/templates/*.txt.jinja
+include src/meetupmatcher/test_data/*

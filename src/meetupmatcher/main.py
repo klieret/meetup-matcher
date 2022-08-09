@@ -10,15 +10,16 @@ from meetupmatcher.templating import EmailGenerator
 from meetupmatcher.util.log import logger
 
 
-def main():
+def main(args=None):
     parser = argparse.ArgumentParser()
     parser.add_argument("-n", "--dry-run", action="store_true")
     parser.add_argument("input", help="Input csv file")
     parser.add_argument(
         "--seed", type=str, help="Set the seed for the RNG", default="week"
     )
-    args = parser.parse_args()
+    args = parser.parse_args(args=args)
     rng = get_rng_from_option(args.seed)
+    logger.debug(f"Reading from {args.input}")
     people = People(pd.read_csv(args.input))
     solution = solve_numeric(ProblemStatement(len(people), people.df.notwo.sum()))
     logger.info(f"Solution: {solution}")
