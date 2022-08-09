@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from pathlib import Path, PurePath
 
-import pyyaml as yaml
+import yaml
 
 from meetupmatcher.util.compat_resource import resources
 from meetupmatcher.util.log import logger
