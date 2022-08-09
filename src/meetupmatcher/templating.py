@@ -20,6 +20,9 @@ class Email:
     subject: str
     content: str
 
+    def to_str(self) -> str:
+        return f"To: {', '.join(self.to)}\nSubject: {self.subject}\n\n{self.content}"
+
 
 class EmailGenerator:
     def __init__(self):

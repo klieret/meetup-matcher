@@ -30,10 +30,7 @@ def main():
     )
     mails = list(EmailGenerator().generate_emails(people, paired_up))
     if args.dry_run:
-        for mail in mails:
-            print(mail.to, mail.subject)
-            print(mail.content)
-            print("-" * 80)
+        print(("\n" + "-" * 80 + "\n").join([mail.to_str() for mail in mails]))
     else:
         import getpass
 
