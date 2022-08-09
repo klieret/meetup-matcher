@@ -6,6 +6,7 @@ import time
 
 import pandas as pd
 
+from meetupmatcher.config import Config
 from meetupmatcher.data import People
 from meetupmatcher.matcher import NoSolution, ProblemStatement, pair_up, solve_numeric
 from meetupmatcher.pseudorandom import get_rng_from_option
@@ -26,7 +27,7 @@ def main(args=None):
     args = parser.parse_args(args=args)
     rng = get_rng_from_option(args.seed)
     logger.debug(f"Reading from {args.input}")
-    people = People(pd.read_csv(args.input))
+    people = People(pd.read_csv(args.input), config=Config(args.config))
     try:
         solution = solve_numeric(ProblemStatement(len(people), people.df.notwo.sum()))
     except NoSolution as e:

@@ -2,6 +2,8 @@ from __future__ import annotations
 
 from pathlib import Path, PurePath
 
+import pyyaml as yaml
+
 from meetupmatcher.util.compat_resource import resources
 from meetupmatcher.util.log import logger
 
@@ -41,3 +43,19 @@ def find_config(supplied_path: str | PurePath | None = None) -> Path:
         path,
     )
     return path
+
+
+class Config:
+    def __init__(self, path: str | PurePath | None):
+        data = yaml.load(find_config(path).read_text(), Loader=yaml.SafeLoader)
+        self._validate(data)
+        self._data = data
+
+    def _validate(self, data: dict):
+        pass
+
+    def __getitem__(self, item):
+        return self._data[item]
+
+    def __iter__(self):
+        return iter(self._data)
