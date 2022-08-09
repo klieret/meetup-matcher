@@ -4,7 +4,7 @@ import time
 import pandas as pd
 
 from meetupmatcher.data import People
-from meetupmatcher.matcher import ProblemStatement, pair_up, solve_numeric
+from meetupmatcher.matcher import NoSolution, ProblemStatement, pair_up, solve_numeric
 from meetupmatcher.pseudorandom import get_rng_from_option
 from meetupmatcher.templating import EmailGenerator
 from meetupmatcher.util.log import logger
@@ -21,7 +21,11 @@ def main(args=None):
     rng = get_rng_from_option(args.seed)
     logger.debug(f"Reading from {args.input}")
     people = People(pd.read_csv(args.input))
-    solution = solve_numeric(ProblemStatement(len(people), people.df.notwo.sum()))
+    try:
+        solution = solve_numeric(ProblemStatement(len(people), people.df.notwo.sum()))
+    except NoSolution as e:
+        logger.critical(f"No solution could be found: {e}")
+
     logger.info(f"Solution: {solution}")
     paired_up = pair_up(
         solution,
