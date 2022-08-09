@@ -1,11 +1,5 @@
-import sys
-
 from meetupmatcher.main import main
-
-if sys.version_info >= (3, 9):
-    from importlib import resources
-else:
-    import importlib_resources as resources
+from meetupmatcher.util.compat_resource import resources
 
 
 def test_integration(capsys):

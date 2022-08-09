@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import sys
 from dataclasses import dataclass
 from typing import Iterator
 
@@ -9,11 +8,7 @@ from jinja2 import Environment, FileSystemLoader
 
 from meetupmatcher.data import People
 from meetupmatcher.matcher import PairUpResult
-
-if sys.version_info >= (3, 9):
-    from importlib import resources
-else:
-    import importlib_resources as resources
+from meetupmatcher.util.compat_resource import resources
 
 
 @dataclass

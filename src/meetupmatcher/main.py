@@ -18,7 +18,10 @@ def main(args=None):
     parser.add_argument("-n", "--dry-run", action="store_true")
     parser.add_argument("input", help="Input csv file")
     parser.add_argument(
-        "--seed", type=str, help="Set the seed for the RNG", default="week"
+        "-s", "--seed", type=str, help="Set the seed for the RNG", default="week"
+    )
+    parser.add_argument(
+        "-c", "--config", type=str, help="Path to config file", default=None
     )
     args = parser.parse_args(args=args)
     rng = get_rng_from_option(args.seed)
