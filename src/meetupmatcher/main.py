@@ -1,4 +1,5 @@
 import argparse
+import sys
 import time
 
 import pandas as pd
@@ -25,6 +26,7 @@ def main(args=None):
         solution = solve_numeric(ProblemStatement(len(people), people.df.notwo.sum()))
     except NoSolution as e:
         logger.critical(f"No solution could be found: {e}")
+        sys.exit(1)
 
     logger.info(f"Solution: {solution}")
     paired_up = pair_up(
