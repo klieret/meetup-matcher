@@ -8,6 +8,7 @@ class People:
 
     def __init__(self, df: pd.DataFrame):
         self._check_df(df)
+        df.slack = df.slack.fillna("")
         self.df = df
         logger.info(
             f"Loaded {len(self.df)} people. {self.df.notwo.sum()} people "
