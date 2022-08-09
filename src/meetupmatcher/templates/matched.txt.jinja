@@ -1,6 +1,6 @@
 Dear {{ names | join(', ') }},
 
-you have been matched to a tea time!
+you have been matched to a meetup!
 
 Here are your details:
 
@@ -8,9 +8,10 @@ Here are your details:
 * {{ p['name'] }} (email: {{ p.email }}{% if p.slack %}, slack: {{ p.slack }}{% endif %})
 {% endfor %}
 
-You are now supposed to meet up in the week specified in the invitation.
-Of course you do not have to go out for tea, you can just as well have lunch, take a walk, or anything else you like.
+You are now supposed to meet up in the week specified in the invitation. You can go out for tea, coffee, have lunch, take a walk, or do anything else you like.
+
+Please click "reply all", remove the meetup matcher email address, and suggest a few dates/times to your group (or use slack for the same). Alternatively you can also use a website like https://crab.fit/ to settle on the dates/times.
 
 Hope you're having fun!
-Tea-time matcher bot
+Meetup matcher bot
 {%- include "footnote.txt.jinja" -%}

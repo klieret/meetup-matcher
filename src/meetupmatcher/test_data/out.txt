@@ -3,7 +3,7 @@ Subject: Tea-time pairing
 
 Dear name8, name9, name11,
 
-you have been matched to a tea time!
+you have been matched to a meetup!
 
 Here are your details:
 
@@ -12,11 +12,12 @@ Here are your details:
 * name11 (email: email11@sdf.x)
 
 
-You are now supposed to meet up in the week specified in the invitation.
-Of course you do not have to go out for tea, you can just as well have lunch, take a walk, or anything else you like.
+You are now supposed to meet up in the week specified in the invitation. You can go out for tea, coffee, have lunch, take a walk, or do anything else you like.
+
+Please click "reply all", remove the meetup matcher email address, and suggest a few dates/times to your group (or use slack for the same). Alternatively you can also use a website like https://crab.fit/ to settle on the dates/times.
 
 Hope you're having fun!
-Tea-time matcher bot
+Meetup matcher bot
 ---
 
 The python package that matched you to your group and generated this email
@@ -30,7 +31,7 @@ Subject: Tea-time pairing
 
 Dear name0, name14, name15,
 
-you have been matched to a tea time!
+you have been matched to a meetup!
 
 Here are your details:
 
@@ -39,11 +40,12 @@ Here are your details:
 * name15 (email: email15@sdf.x)
 
 
-You are now supposed to meet up in the week specified in the invitation.
-Of course you do not have to go out for tea, you can just as well have lunch, take a walk, or anything else you like.
+You are now supposed to meet up in the week specified in the invitation. You can go out for tea, coffee, have lunch, take a walk, or do anything else you like.
+
+Please click "reply all", remove the meetup matcher email address, and suggest a few dates/times to your group (or use slack for the same). Alternatively you can also use a website like https://crab.fit/ to settle on the dates/times.
 
 Hope you're having fun!
-Tea-time matcher bot
+Meetup matcher bot
 ---
 
 The python package that matched you to your group and generated this email
@@ -57,7 +59,7 @@ Subject: Tea-time pairing
 
 Dear name12, name13, name6,
 
-you have been matched to a tea time!
+you have been matched to a meetup!
 
 Here are your details:
 
@@ -66,11 +68,12 @@ Here are your details:
 * name6 (email: email6@sdf.x, slack: slack6)
 
 
-You are now supposed to meet up in the week specified in the invitation.
-Of course you do not have to go out for tea, you can just as well have lunch, take a walk, or anything else you like.
+You are now supposed to meet up in the week specified in the invitation. You can go out for tea, coffee, have lunch, take a walk, or do anything else you like.
+
+Please click "reply all", remove the meetup matcher email address, and suggest a few dates/times to your group (or use slack for the same). Alternatively you can also use a website like https://crab.fit/ to settle on the dates/times.
 
 Hope you're having fun!
-Tea-time matcher bot
+Meetup matcher bot
 ---
 
 The python package that matched you to your group and generated this email
@@ -84,7 +87,7 @@ Subject: Tea-time pairing
 
 Dear name10, name4, name7,
 
-you have been matched to a tea time!
+you have been matched to a meetup!
 
 Here are your details:
 
@@ -93,11 +96,12 @@ Here are your details:
 * name7 (email: email7@sdf.x)
 
 
-You are now supposed to meet up in the week specified in the invitation.
-Of course you do not have to go out for tea, you can just as well have lunch, take a walk, or anything else you like.
+You are now supposed to meet up in the week specified in the invitation. You can go out for tea, coffee, have lunch, take a walk, or do anything else you like.
+
+Please click "reply all", remove the meetup matcher email address, and suggest a few dates/times to your group (or use slack for the same). Alternatively you can also use a website like https://crab.fit/ to settle on the dates/times.
 
 Hope you're having fun!
-Tea-time matcher bot
+Meetup matcher bot
 ---
 
 The python package that matched you to your group and generated this email
@@ -111,7 +115,7 @@ Subject: Tea-time pairing
 
 Dear name1, name2, name3, name5,
 
-you have been matched to a tea time!
+you have been matched to a meetup!
 
 Here are your details:
 
@@ -121,11 +125,12 @@ Here are your details:
 * name5 (email: email5@sdf.x)
 
 
-You are now supposed to meet up in the week specified in the invitation.
-Of course you do not have to go out for tea, you can just as well have lunch, take a walk, or anything else you like.
+You are now supposed to meet up in the week specified in the invitation. You can go out for tea, coffee, have lunch, take a walk, or do anything else you like.
+
+Please click "reply all", remove the meetup matcher email address, and suggest a few dates/times to your group (or use slack for the same). Alternatively you can also use a website like https://crab.fit/ to settle on the dates/times.
 
 Hope you're having fun!
-Tea-time matcher bot
+Meetup matcher bot
 ---
 
 The python package that matched you to your group and generated this email
