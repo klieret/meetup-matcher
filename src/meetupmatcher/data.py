@@ -19,6 +19,12 @@ class People:
 
     def _check_df(self, df: pd.DataFrame):
         cols = set(df.columns)
+        if not df.email.is_unique:
+            raise ValueError("Emails not unique. Do you have duplicates?")
+        if not df.slack.dropna().is_unique:
+            logger.warning("Not all slacks unique.")
+        if not df.name.is_unique:
+            logger.warning("Not all names unique.")
         if not self.cols.issubset(cols):
             raise ValueError(
                 f"Columns appear to be missing. Expected: {self.cols}, got: {cols}"
