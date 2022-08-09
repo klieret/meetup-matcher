@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import numpy as np
 import pandas as pd
 
 from meetupmatcher.config import Config
@@ -25,13 +26,17 @@ class People:
                 df.rename(columns={source: target}, inplace=True)
         if "name" not in df.columns:
             df["name"] = df.email.apply(lambda x: x.split("@")[0])
+        if "slack" not in df.columns:
+            df["slack"] = ""
+        if "notwo" not in df.columns:
+            df["notwo"] = False
         return df
 
     def _check_df(self, df: pd.DataFrame):
         cols = set(df.columns)
         if not df.email.is_unique:
             raise ValueError("Emails not unique. Do you have duplicates?")
-        if not df.slack.dropna().is_unique:
+        if not df.slack.replace({"": np.nan}).dropna().is_unique:
             logger.warning("Not all slacks unique.")
         if not df.name.is_unique:
             logger.warning("Not all names unique.")
