@@ -91,7 +91,7 @@ def pair_up(
     sn: SolutionNumbers,
     idx: set[int],
     idx_notwo: set[int],
-    rng: np.random.RandomState | None = None,
+    rng: np.random.Generator | None = None,
 ) -> PairUpResult:
     assert sn.n_people == len(idx) + len(idx_notwo)
 
