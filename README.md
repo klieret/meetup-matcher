@@ -50,6 +50,12 @@ gitmoji -i  # npm install gitmoji
 pre-commit install  # pip3 install pre-commit
 ```
 
+## 💖 Contributing
+
+Your help is greatly appreciated! Suggestions, bug reports and feature requests are best opened as [github issues](https://github.com/klieret/meetup-matcher/issues). You are also very welcome to submit a [pull request](https://github.com/klieret/meetup-matcher/pulls)!
+
+Bug reports and pull requests are credited with the help of the [allcontributors bot](https://allcontributors.org/).
+
 <!-- ## ✨ Contributors -->
 <!--  -->
 <!-- Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)): -->
