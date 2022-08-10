@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from meetupmatcher.util.log import logger
 
 

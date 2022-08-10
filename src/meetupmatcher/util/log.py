@@ -1,6 +1,7 @@
 # std
+from __future__ import annotations
+
 import logging
-from typing import Union
 
 import colorlog
 
@@ -39,7 +40,7 @@ def get_logger():
     return _log
 
 
-def set_log_level(level: Union[str, int]) -> None:
+def set_log_level(level: str | int) -> None:
     """Set global log level.
 
     Args:

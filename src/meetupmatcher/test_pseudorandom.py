@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from datetime import datetime
 
 from meetupmatcher.pseudorandom import get_weeks_since_epoch
