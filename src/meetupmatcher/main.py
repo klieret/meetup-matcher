@@ -1,9 +1,9 @@
 from __future__ import annotations
 
-import argparse
 import sys
 import time
 
+import click
 import pandas as pd
 
 from meetupmatcher.config import Config
@@ -14,20 +14,17 @@ from meetupmatcher.templating import EmailGenerator
 from meetupmatcher.util.log import logger
 
 
-def main(args=None):
-    parser = argparse.ArgumentParser()
-    parser.add_argument("-n", "--dry-run", action="store_true")
-    parser.add_argument("input", help="Input csv file")
-    parser.add_argument(
-        "-s", "--seed", type=str, help="Set the seed for the RNG", default="week"
-    )
-    parser.add_argument(
-        "-c", "--config", type=str, help="Path to config file", default=None
-    )
-    args = parser.parse_args(args=args)
-    rng = get_rng_from_option(args.seed)
-    logger.debug(f"Reading from {args.input}")
-    people = People(pd.read_csv(args.input), config=Config(args.config))
+@click.command()
+@click.argument("inputfile")
+@click.option("-n", "--dry-run", is_flag=True, help="Don't send emails")
+@click.option("-c", "--config", help="Configuration file", default=None, type=str)
+@click.option(
+    "-s", "--seed", type=str, help="Seed for random number generator", default="week"
+)
+def main(inputfile: str, dry_run: bool, config: str, seed: str) -> None:
+    rng = get_rng_from_option(seed)
+    logger.debug(f"Reading from {inputfile}")
+    people = People(pd.read_csv(inputfile), config=Config(config))
     try:
         solution = solve_numeric(ProblemStatement(len(people), people.df.notwo.sum()))
     except NoSolution as e:
@@ -42,7 +39,7 @@ def main(args=None):
         rng=rng,
     )
     mails = list(EmailGenerator().generate_emails(people, paired_up))
-    if args.dry_run:
+    if dry_run:
         print(("\n" + "-" * 80 + "\n").join([mail.to_str() for mail in mails]))
     else:
         import getpass

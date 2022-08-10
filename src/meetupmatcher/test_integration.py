@@ -1,6 +1,7 @@
 from pathlib import Path
 
 import pytest
+from click.testing import CliRunner
 
 from meetupmatcher.main import main
 from meetupmatcher.util.compat_resource import resources
@@ -23,8 +24,10 @@ def get_test_pairs() -> list[tuple[Path, Path, Path]]:
 
 
 @pytest.mark.parametrize("inpt,config,outpt", get_test_pairs())
-def test_integration(inpt: Path, config: Path, outpt: Path, capsys):
-    main(["--dry-run", "--seed", "0", str(inpt), "--config", str(config)])
-    captured = capsys.readouterr()
-    expected = outpt.read_text()
-    assert captured.out == expected
+def test_integration(inpt: Path, config: Path, outpt: Path):
+    runner = CliRunner()
+    result = runner.invoke(
+        main, ["--dry-run", "--seed", "0", str(inpt), "--config", str(config)]
+    )
+    assert result.exit_code == 0
+    assert result.output == outpt.read_text()
