@@ -21,7 +21,10 @@ from meetupmatcher.util.log import logger
 @click.option(
     "-s", "--seed", type=str, help="Seed for random number generator", default="week"
 )
-def main(inputfile: str, dry_run: bool, config: str, seed: str) -> None:
+@click.option(
+    "-t", "--templates", help="Path to template directory", default=None, type=str
+)
+def main(inputfile: str, dry_run: bool, config: str, seed: str, templates: str) -> None:
     rng = get_rng_from_option(seed)
     logger.debug(f"Reading from {inputfile}")
     people = People(pd.read_csv(inputfile), config=Config(config))
@@ -38,7 +41,9 @@ def main(inputfile: str, dry_run: bool, config: str, seed: str) -> None:
         set(people.df.index[people.df.notwo]),
         rng=rng,
     )
-    mails = list(EmailGenerator().generate_emails(people, paired_up))
+    mails = list(
+        EmailGenerator(template_path=templates).generate_emails(people, paired_up)
+    )
     if dry_run:
         print(("\n" + "-" * 80 + "\n").join([mail.to_str() for mail in mails]))
     else:

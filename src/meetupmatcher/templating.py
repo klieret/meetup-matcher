@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+from pathlib import Path, PurePath
 from typing import Iterator
 
 import pandas as pd
@@ -22,8 +23,11 @@ class Email:
 
 
 class EmailGenerator:
-    def __init__(self):
-        template_path = resources.files("meetupmatcher") / "templates"
+    def __init__(self, template_path: str | None | PurePath = None):
+        if template_path is None:
+            template_path = Path(
+                resources.files("meetupmatcher.templates")  # type: ignore
+            )
         self.environment = Environment(
             loader=FileSystemLoader(template_path)  # type: ignore
         )
