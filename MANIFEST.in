@@ -1,3 +1,3 @@
 include src/meetupmatcher/templates/*.txt.jinja
 include src/meetupmatcher/test_data/*
-include src/meetupmatcher/config/*
+include src/meetupmatcher/config_files/*
