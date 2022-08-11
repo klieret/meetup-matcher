@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import sys
-import time
 
 import click
 import pandas as pd
@@ -52,19 +51,8 @@ def main(inputfile: str, dry_run: bool, config: str, seed: str, templates: str) 
     if dry_run:
         print(("\n" + "-" * 80 + "\n").join([mail.to_str() for mail in mails]))
     else:
-        import getpass
-
-        import yagmail
 
         logger.warning(f"About to send {len(mails)} emails. This is NOT a dry-run.")
-        username = input("Gmail username: ")
-        pwd = getpass.getpass("Gmail password: ")
-        yag = yagmail.SMTP(username, pwd)
-        for mail in mails:
-            logger.debug(f"Sending email to {mail.to}")
-            yag.send(to=mail.to, subject=mail.subject, contents=mail.content)
-            logger.debug("Sending done. Sleeping for 1 second")
-            time.sleep(1)
 
 
 if __name__ == "__main__":
