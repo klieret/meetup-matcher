@@ -19,7 +19,12 @@ from meetupmatcher.util.log import logger
 @click.option("-n", "--dry-run", is_flag=True, help="Don't send emails")
 @click.option("-c", "--config", help="Configuration file", default=None, type=str)
 @click.option(
-    "-s", "--seed", type=str, help="Seed for random number generator", default="week"
+    "-s",
+    "--seed",
+    type=str,
+    help="Seed for random number generator",
+    default="week",
+    show_default=True,
 )
 @click.option(
     "-t", "--templates", help="Path to template directory", default=None, type=str
