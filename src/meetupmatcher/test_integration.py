@@ -27,22 +27,26 @@ def get_test_pairs() -> list[tuple[Path, Path, Path]]:
 
 
 def _test_expected_output(
-    inpt: Path, config: Path, outpt: Path, additional_args: list[str] | None = None
+    inpt: Path,
+    config: Path | None,
+    outpt: Path,
+    additional_args: list[str] | None = None,
 ):
     if additional_args is None:
         additional_args = []
     runner = CliRunner(mix_stderr=False)
+    command = [
+        "--dry-run",
+        "--seed",
+        "0",
+        str(inpt),
+    ]
+    if config is not None:
+        command.extend(["--config", str(config)])
+    command.extend(additional_args)
     result = runner.invoke(
         main,
-        [
-            "--dry-run",
-            "--seed",
-            "0",
-            str(inpt),
-            "--config",
-            str(config),
-            *additional_args,
-        ],
+        command,
         catch_exceptions=False,
     )
     assert result.exit_code == 0
@@ -62,4 +66,13 @@ def test_specified_template_dir():
         config=tfd / "default.yaml",
         outpt=tfd / "out_default.txt",
         additional_args=["--templates", str(template_dir)],
+    )
+
+
+def test_unspecified_config():
+    tfd = test_files_dir
+    _test_expected_output(
+        inpt=tfd / "default.csv",
+        config=None,
+        outpt=tfd / "out_default.txt",
     )
