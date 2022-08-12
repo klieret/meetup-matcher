@@ -7,6 +7,7 @@ import pandas as pd
 
 from meetupmatcher.config import Config
 from meetupmatcher.data import People
+from meetupmatcher.mails import YagmailSender
 from meetupmatcher.matcher import NoSolution, ProblemStatement, pair_up, solve_numeric
 from meetupmatcher.pseudorandom import get_rng_from_option
 from meetupmatcher.templating import EmailGenerator
@@ -37,7 +38,6 @@ def main(inputfile: str, dry_run: bool, config: str, seed: str, templates: str) 
     except NoSolution as e:
         logger.critical(f"No solution could be found: {e}")
         sys.exit(1)
-
     logger.info(f"Solution: {solution}")
     paired_up = pair_up(
         solution,
@@ -48,11 +48,7 @@ def main(inputfile: str, dry_run: bool, config: str, seed: str, templates: str) 
     mails = list(
         EmailGenerator(template_path=templates).generate_emails(people, paired_up)
     )
-    if dry_run:
-        print(("\n" + "-" * 80 + "\n").join([mail.to_str() for mail in mails]))
-    else:
-
-        logger.warning(f"About to send {len(mails)} emails. This is NOT a dry-run.")
+    YagmailSender(dry_run).send(mails)
 
 
 if __name__ == "__main__":
