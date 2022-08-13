@@ -30,6 +30,8 @@ class People:
             df["slack"] = ""
         if "notwo" not in df.columns:
             df["notwo"] = False
+        else:
+            df.notwo = df.notwo.fillna(False)
         return df
 
     def _check_df(self, df: pd.DataFrame):
