@@ -21,6 +21,7 @@ class MailSender(ABC):
             logger.warning(
                 f"About to send {len(emails)} emails. This is NOT a dry-run."
             )
+            self._send(emails)
 
     @abstractmethod
     def _send(self, emails: list[Email]) -> None:
