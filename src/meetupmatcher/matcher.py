@@ -14,6 +14,9 @@ class NoSolution(Exception):
 
 @dataclass
 class ProblemStatement:
+    """All information required to determine the number of groups"""
+
+    #: Total number of people
     n_people: int
     #: The number of people who don't want to be in a group of two
     n_notwo: int
@@ -24,12 +27,16 @@ class ProblemStatement:
 
 @dataclass
 class SolutionNumbers:
+    """Number of groups and similar information"""
+
     #: Number of groups of two, three, four
     partitions: tuple[int, int, int]
+    #: Number of people that needed to be removed
     removed: int = 0
 
     @property
     def n_people(self) -> int:
+        """Total number of people"""
         return (
             2 * self.partitions[0]
             + 3 * self.partitions[1]
