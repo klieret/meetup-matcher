@@ -39,6 +39,11 @@ repos:
     hooks:
     -   id: pyupgrade
         args: ["--py37-plus"]
+- repo: https://github.com/asottile/setup-cfg-fmt
+  rev: "v2.0.0"
+  hooks:
+    - id: setup-cfg-fmt
+      args: [--include-version-classifiers, --max-py-version=3.10]
 
 ci:
     autoupdate_schedule: monthly
