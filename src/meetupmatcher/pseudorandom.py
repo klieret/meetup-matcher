@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import time
 
+import dateutil
 import numpy as np
 
 from meetupmatcher.util.log import logger
@@ -32,4 +33,10 @@ def get_rng_from_option(option: str) -> np.random.Generator:
     elif option.isnumeric():
         return get_rng(int(option))
     else:
-        raise NotImplementedError(f"Unknown option for the RNG seed: {option}")
+        try:
+            dt = dateutil.parser.parse(option)
+            return get_rng(dt.timestamp())
+        except Exception as e:
+            raise NotImplementedError(
+                f"Unsupported option for the RNG seed: {option}"
+            ) from e
