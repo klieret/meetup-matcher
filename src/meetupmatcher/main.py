@@ -22,7 +22,8 @@ from meetupmatcher.util.log import logger
     "-s",
     "--seed",
     type=str,
-    help="Seed for random number generator",
+    help="Seed for random number generator. Supported are 'week', an integer, "
+    "or anything that can be interpreted as a date",
     default="week",
     show_default=True,
 )
