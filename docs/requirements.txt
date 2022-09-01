@@ -1,0 +1,2 @@
+sphinx-click
+sphinx_book_theme
