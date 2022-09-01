@@ -1,2 +1,3 @@
 sphinx-click
 sphinx_book_theme
+git+https://github.com/klieret/meetup-matcher.git
