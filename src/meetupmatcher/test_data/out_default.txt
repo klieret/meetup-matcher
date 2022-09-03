@@ -1,15 +1,15 @@
-To: email0@sdf.x, email10@sdf.x, email4@sdf.x
+To: email0@sdf.x, email4@sdf.x, email13@sdf.x
 Subject: Tea-time pairing
 
-Dear name0, name10, name4,
+Dear name0, name4, name13,
 
 you have been matched to a meetup!
 
 Here are your details:
 
 * name0 (email: email0@sdf.x, slack: slack0)
-* name10 (email: email10@sdf.x, slack: slack10)
 * name4 (email: email4@sdf.x, slack: slack4)
+* name13 (email: email13@sdf.x)
 
 
 You are now supposed to meet up in the week specified in the invitation. You can go out for tea, coffee, have lunch, take a walk, or do anything else you like.
@@ -26,18 +26,18 @@ pseudorandom number generator is seed with the week number, you can
 also verify the pseudorandomness of your matched group (though you need the
 list of participants for this).
 --------------------------------------------------------------------------------
-To: email1@sdf.x, email13@sdf.x, email14@sdf.x
+To: email1@sdf.x, email10@sdf.x, email12@sdf.x
 Subject: Tea-time pairing
 
-Dear name1, name13, name14,
+Dear name1, name10, name12,
 
 you have been matched to a meetup!
 
 Here are your details:
 
 * name1 (email: email1@sdf.x)
-* name13 (email: email13@sdf.x)
-* name14 (email: email14@sdf.x, slack: slack14)
+* name10 (email: email10@sdf.x, slack: slack10)
+* name12 (email: email12@sdf.x, slack: slack12)
 
 
 You are now supposed to meet up in the week specified in the invitation. You can go out for tea, coffee, have lunch, take a walk, or do anything else you like.
@@ -82,17 +82,17 @@ pseudorandom number generator is seed with the week number, you can
 also verify the pseudorandomness of your matched group (though you need the
 list of participants for this).
 --------------------------------------------------------------------------------
-To: email2@sdf.x, email12@sdf.x, email15@sdf.x
+To: email14@sdf.x, email6@sdf.x, email15@sdf.x
 Subject: Tea-time pairing
 
-Dear name2, name12, name15,
+Dear name14, name6, name15,
 
 you have been matched to a meetup!
 
 Here are your details:
 
-* name2 (email: email2@sdf.x, slack: slack2)
-* name12 (email: email12@sdf.x, slack: slack12)
+* name14 (email: email14@sdf.x, slack: slack14)
+* name6 (email: email6@sdf.x, slack: slack6)
 * name15 (email: email15@sdf.x)
 
 
@@ -110,18 +110,18 @@ pseudorandom number generator is seed with the week number, you can
 also verify the pseudorandomness of your matched group (though you need the
 list of participants for this).
 --------------------------------------------------------------------------------
-To: email3@sdf.x, email5@sdf.x, email6@sdf.x, email7@sdf.x
+To: email2@sdf.x, email3@sdf.x, email5@sdf.x, email7@sdf.x
 Subject: Tea-time pairing
 
-Dear name3, name5, name6, name7,
+Dear name2, name3, name5, name7,
 
 you have been matched to a meetup!
 
 Here are your details:
 
+* name2 (email: email2@sdf.x, slack: slack2)
 * name3 (email: email3@sdf.x)
 * name5 (email: email5@sdf.x)
-* name6 (email: email6@sdf.x, slack: slack6)
 * name7 (email: email7@sdf.x)
 
 

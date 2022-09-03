@@ -5,6 +5,8 @@ from typing import TypeVar
 
 import numpy as np
 
+from meetupmatcher.util.log import logger
+
 T = TypeVar("T")
 
 
@@ -91,71 +93,79 @@ def solve_numeric(ps: ProblemStatement) -> SolutionNumbers:
 def sample(
     mask: np.ndarray,
     n: int,
-    rng: np.random.RandomState | None = None,
+    availabilities: np.ndarray | None = None,
+    rng: np.random.Generator | None = None,
+    max_joint_av_boon=5,
+    wasted_resource_offset=3,
 ) -> np.ndarray:
+    """Put people in a group of fixed size in a way that helps to maximize the number
+    of joint availabilities of each group in the ent.
+
+    Args:
+        mask:
+        n: Sample/group size
+        availabilities:
+        rng:
+        max_joint_av_boon: This limits the probability boost for joint availabilities.
+        wasted_resource_offset: The lower this parameter, the more we punish people with
+            many availabilities being assigned to a group where the joint availability
+            does not "profit from it"
+
+    Returns:
+        Set of indices of people belonging into group
+    """
+    if n == 0:
+        return np.array([], dtype="int")
     if rng is None:
         rng = np.random.RandomState()
-    return rng.choice(np.arange(len(mask)), size=n, replace=False, p=mask / mask.sum())
+    if availabilities is None:
+        availabilities = np.full((len(mask), 1), True)
+    group = []
+    mask = mask.copy()
 
+    def update_availabilities_with_mask(availabilities, mask):
+        return availabilities & mask.reshape(-1, 1)
 
-# def sample_with_availabilities( source: np.ndarray,
-#     n: int,
-#     availabilities: np.ndarray | None = None,
-#     rng: np.random.Generator | None = None,
-#     max_joint_av_boon=5,
-#     wasted_resource_offset=3,
-# ) -> set[int]:
-#     """Put people in a group of fixed size in a way that helps to maximize the number
-#     of joint availabilities of each group in the ent.
-#
-#     Args:
-#         source: Sample from here
-#         n: Sample/group size
-#         availabilities:
-#         rng:
-#         max_joint_av_boon: This limits the probability boost for joint availabilities.
-#         wasted_resource_offset: The lower this parameter, the more we punish people with
-#             many availabilities being assigned to a group where the joint availability
-#             does not "profit from it"
-#
-#     Returns:
-#         Set of indices of people belonging into group
-#     """
-#     if rng is None:
-#         rng = np.random.RandomState()
-#     if availabilities is None:
-#         return sample(source=source, n=n, rng=rng)
-#     group = []
-#     av_sums: np.ndarray = np.sum(availabilities, axis=1)
-#     idx_lowest_availabilities = (av_sums == av_sums.min()).nonzero()[0]
-#     idx_first_person = rng.choice(idx_lowest_availabilities)
-#     base_availability = availabilities[idx_first_person]
-#     group.append(source[idx_first_person])
-#     source = np.delete(source, idx_first_person)
-#     availabilities = np.delete(availabilities, idx_first_person, axis=0)
-#     n -= 1
-#     print(base_availability.shape)
-#     for _ in range(n):
-#         joint_availabilities = availabilities & base_availability
-#         av_sums = np.sum(availabilities, axis=1)
-#         joint_av_sums = np.sum(joint_availabilities, axis=1)
-#         probs = np.min((np.ones_like(joint_av_sums), joint_av_sums), axis=0) * (
-#             np.min(
-#                 (np.full_like(joint_av_sums, max_joint_av_boon), joint_av_sums), axis=0
-#             )
-#             / (wasted_resource_offset + av_sums)
-#         )
-#         try:
-#             probs /= probs.sum()
-#         except ZeroDivisionError:
-#             raise IncompatibleAvailabilities
-#         idx_next_person = rng.choice(len(source), p=probs)
-#         base_availability &= availabilities[idx_next_person]
-#         group.append(source[idx_next_person])
-#         availabilities = np.delete(availabilities, idx_next_person, axis=0)
-#         source = np.delete(source, idx_next_person)
-#     return set(group)
-#
+    availabilities = update_availabilities_with_mask(availabilities, mask).copy()
+    av_sums: np.ndarray = np.sum(availabilities, axis=1)
+    logger.debug("av_sums: %s, n: %d", av_sums, n)
+    lowest_availability = av_sums[av_sums > 0].min()
+    idx_lowest_availabilities = (av_sums == lowest_availability).nonzero()[0]
+    idx_first_person = rng.choice(idx_lowest_availabilities)
+    logger.debug(
+        "Chose first person %d with av %d", idx_first_person, lowest_availability
+    )
+    assert mask[idx_first_person]
+    base_availability = availabilities[idx_first_person]
+    group.append(idx_first_person)
+    mask[idx_first_person] = False
+    availabilities = update_availabilities_with_mask(availabilities, mask)
+    n -= 1
+    for _ in range(n):
+        logger.debug("In loop")
+        if mask.sum() == 0:
+            raise IncompatibleAvailabilities("Mask is all False.")
+        joint_availabilities = availabilities & base_availability
+        av_sums = np.sum(availabilities, axis=1)
+        joint_av_sums = np.sum(joint_availabilities, axis=1)
+        probs = np.min((np.ones_like(joint_av_sums), joint_av_sums), axis=0) * (
+            np.min(
+                (np.full_like(joint_av_sums, max_joint_av_boon), joint_av_sums), axis=0
+            )
+            / (wasted_resource_offset + av_sums)
+        )
+        if probs.sum() == 0:
+            raise IncompatibleAvailabilities
+        probs /= probs.sum()
+        idx_next_person = rng.choice(len(mask), p=probs)
+        logger.debug(
+            "Chose next person %d with av %d", idx_next_person, av_sums[idx_next_person]
+        )
+        base_availability &= availabilities[idx_next_person]
+        mask[idx_next_person] = False
+        availabilities = update_availabilities_with_mask(availabilities, mask)
+        group.append(idx_next_person)
+    return np.array(group)
 
 
 @dataclass
@@ -176,6 +186,8 @@ def pair_up(
     sn: SolutionNumbers,
     idx: np.ndarray,
     notwo: np.ndarray,
+    availabilities: np.ndarray | None = None,
+    *,
     rng: np.random.Generator | None = None,
 ) -> PairUpResult:
     """
@@ -202,7 +214,9 @@ def pair_up(
             this_mask = mask.copy()
             if group_size == 2:
                 this_mask[notwo] = False
-            new_group_idx = sample(this_mask, n=group_size, rng=rng)
+            new_group_idx = sample(
+                this_mask, availabilities=availabilities, n=group_size, rng=rng
+            )
             mask[new_group_idx] = False
             segmentation.append(set(idx[new_group_idx]))
 
