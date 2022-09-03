@@ -1,15 +1,15 @@
-To: email8@sdf.x, email4@sdf.x, email6@sdf.x
+To: email4@sdf.x, email6@sdf.x, email8@sdf.x
 Subject: Tea-time pairing
 
-Dear email8, email4, email6,
+Dear email4, email6, email8,
 
 you have been matched to a meetup!
 
 Here are your details:
 
-* email8 (email: email8@sdf.x)
 * email4 (email: email4@sdf.x)
 * email6 (email: email6@sdf.x)
+* email8 (email: email8@sdf.x)
 
 
 You are all available at the following times:
@@ -46,10 +46,10 @@ Here are your details:
 
 
 You are all available at the following times:
+* Afternoon Wednesday
+* Lunch Friday
 * Lunch Monday
 * Lunch Wednesday
-* Lunch Friday
-* Afternoon Wednesday
 
 
 
@@ -67,25 +67,25 @@ pseudorandom number generator is seed with the week number, you can
 also verify the pseudorandomness of your matched group (though you need the
 list of participants for this).
 --------------------------------------------------------------------------------
-To: email9@sdf.x, email2@sdf.x, email3@sdf.x, email1@sdf.x
+To: email1@sdf.x, email2@sdf.x, email3@sdf.x, email9@sdf.x
 Subject: Tea-time pairing
 
-Dear email9, email2, email3, email1,
+Dear email1, email2, email3, email9,
 
 you have been matched to a meetup!
 
 Here are your details:
 
-* email9 (email: email9@sdf.x)
+* email1 (email: email1@sdf.x)
 * email2 (email: email2@sdf.x)
 * email3 (email: email3@sdf.x)
-* email1 (email: email1@sdf.x)
+* email9 (email: email9@sdf.x)
 
 
 You are all available at the following times:
-* Lunch Thursday
-* Lunch Monday
 * Afternoon Wednesday
+* Lunch Monday
+* Lunch Thursday
 
 
 

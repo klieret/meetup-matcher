@@ -48,9 +48,9 @@ class EmailGenerator:
         av: np.ndarray | None = None,
     ) -> Email:
         if av_cols:
-            availability_strs = [
+            availability_strs = sorted(
                 av_cols[i] for i in range(len(av_cols)) if av[i]  # type: ignore
-            ]
+            )
         else:
             availability_strs = None
         template = self.environment.get_template("matched.txt.jinja")
@@ -71,7 +71,7 @@ class EmailGenerator:
             person = people.df.loc[r]
             yield self._generate_remove_email(person)
         for i, partition in enumerate(paired_up.segmentation):
-            group = people.df.loc[list(partition)]
+            group = people.df.loc[sorted(partition)]
             yield self._generate_pair_email(
                 group,
                 av_cols=people._availability_product_cols,

@@ -88,17 +88,17 @@ pseudorandom number generator is seed with the week number, you can
 also verify the pseudorandomness of your matched group (though you need the
 list of participants for this).
 --------------------------------------------------------------------------------
-To: email14@sdf.x, email6@sdf.x, email15@sdf.x
+To: email6@sdf.x, email14@sdf.x, email15@sdf.x
 Subject: Tea-time pairing
 
-Dear name14, name6, name15,
+Dear name6, name14, name15,
 
 you have been matched to a meetup!
 
 Here are your details:
 
-* name14 (email: email14@sdf.x, slack: slack14)
 * name6 (email: email6@sdf.x, slack: slack6)
+* name14 (email: email14@sdf.x, slack: slack14)
 * name15 (email: email15@sdf.x)
 
 
