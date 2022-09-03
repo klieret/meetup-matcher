@@ -42,8 +42,8 @@ def main(inputfile: str, dry_run: bool, config: str, seed: str, templates: str) 
     logger.info(f"Solution: {solution}")
     paired_up = pair_up(
         solution,
-        set(people.df.index[~people.df.notwo]),
-        set(people.df.index[people.df.notwo]),
+        people.df.index.to_numpy(),
+        people.df.notwo.to_numpy(),
         rng=rng,
     )
     mails = list(

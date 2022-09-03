@@ -49,9 +49,7 @@ def test_not_solvable():
 def test_pair_up():
     assert pair_up(
         SolutionNumbers(partitions=(1, 1, 0), removed=0),
-        {0, 1, 2, 3},
-        {
-            4,
-        },
+        np.arange(5),
+        np.array([False, False, True, True, True]),
         rng=np.random.RandomState(0),
-    ) == PairUpResult([{2, 3}, {0, 1, 4}], set())
+    ) == PairUpResult([{0, 1}, {2, 3, 4}], set())

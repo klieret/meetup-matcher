@@ -1,14 +1,14 @@
-To: email3@sdf.x, email4@sdf.x
+To: email1@sdf.x, email3@sdf.x
 Subject: Tea-time pairing
 
-Dear email3, email4,
+Dear email1, email3,
 
 you have been matched to a meetup!
 
 Here are your details:
 
+* email1 (email: email1@sdf.x)
 * email3 (email: email3@sdf.x)
-* email4 (email: email4@sdf.x)
 
 
 You are now supposed to meet up in the week specified in the invitation. You can go out for tea, coffee, have lunch, take a walk, or do anything else you like.
@@ -25,18 +25,18 @@ pseudorandom number generator is seed with the week number, you can
 also verify the pseudorandomness of your matched group (though you need the
 list of participants for this).
 --------------------------------------------------------------------------------
-To: email0@sdf.x, email1@sdf.x, email2@sdf.x
+To: email0@sdf.x, email2@sdf.x, email4@sdf.x
 Subject: Tea-time pairing
 
-Dear email0, email1, email2,
+Dear email0, email2, email4,
 
 you have been matched to a meetup!
 
 Here are your details:
 
 * email0 (email: email0@sdf.x)
-* email1 (email: email1@sdf.x)
 * email2 (email: email2@sdf.x)
+* email4 (email: email4@sdf.x)
 
 
 You are now supposed to meet up in the week specified in the invitation. You can go out for tea, coffee, have lunch, take a walk, or do anything else you like.
