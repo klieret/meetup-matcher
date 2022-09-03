@@ -16,7 +16,7 @@ Here are your details:
 
 You are now supposed to meet up in the week specified in the invitation. You can go out for tea, coffee, have lunch, take a walk, or do anything else you like.
 
-Please click "reply all", remove the meetup matcher email address, and suggest a few dates/times to your group (or use slack for the same). Alternatively you can also use a website like https://crab.fit/ to settle on the dates/times (the next iteration of the meetup matcher will likely already have a similar feature included).
+Please click "reply all", remove the meetup matcher email address, and make a concrete suggestion on where to meet.
 
 Hope you're having fun!
 Meetup matcher bot
@@ -46,7 +46,7 @@ Here are your details:
 
 You are now supposed to meet up in the week specified in the invitation. You can go out for tea, coffee, have lunch, take a walk, or do anything else you like.
 
-Please click "reply all", remove the meetup matcher email address, and suggest a few dates/times to your group (or use slack for the same). Alternatively you can also use a website like https://crab.fit/ to settle on the dates/times (the next iteration of the meetup matcher will likely already have a similar feature included).
+Please click "reply all", remove the meetup matcher email address, and make a concrete suggestion on where to meet.
 
 Hope you're having fun!
 Meetup matcher bot
@@ -76,7 +76,7 @@ Here are your details:
 
 You are now supposed to meet up in the week specified in the invitation. You can go out for tea, coffee, have lunch, take a walk, or do anything else you like.
 
-Please click "reply all", remove the meetup matcher email address, and suggest a few dates/times to your group (or use slack for the same). Alternatively you can also use a website like https://crab.fit/ to settle on the dates/times (the next iteration of the meetup matcher will likely already have a similar feature included).
+Please click "reply all", remove the meetup matcher email address, and make a concrete suggestion on where to meet.
 
 Hope you're having fun!
 Meetup matcher bot
@@ -106,7 +106,7 @@ Here are your details:
 
 You are now supposed to meet up in the week specified in the invitation. You can go out for tea, coffee, have lunch, take a walk, or do anything else you like.
 
-Please click "reply all", remove the meetup matcher email address, and suggest a few dates/times to your group (or use slack for the same). Alternatively you can also use a website like https://crab.fit/ to settle on the dates/times (the next iteration of the meetup matcher will likely already have a similar feature included).
+Please click "reply all", remove the meetup matcher email address, and make a concrete suggestion on where to meet.
 
 Hope you're having fun!
 Meetup matcher bot
@@ -137,7 +137,7 @@ Here are your details:
 
 You are now supposed to meet up in the week specified in the invitation. You can go out for tea, coffee, have lunch, take a walk, or do anything else you like.
 
-Please click "reply all", remove the meetup matcher email address, and suggest a few dates/times to your group (or use slack for the same). Alternatively you can also use a website like https://crab.fit/ to settle on the dates/times (the next iteration of the meetup matcher will likely already have a similar feature included).
+Please click "reply all", remove the meetup matcher email address, and make a concrete suggestion on where to meet.
 
 Hope you're having fun!
 Meetup matcher bot
