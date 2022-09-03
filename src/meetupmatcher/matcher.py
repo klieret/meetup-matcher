@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import os
 from dataclasses import dataclass
 from typing import TypeVar
 
@@ -128,13 +129,9 @@ def sample(
 
     availabilities = update_availabilities_with_mask(availabilities, mask).copy()
     av_sums: np.ndarray = np.sum(availabilities, axis=1)
-    logger.debug("av_sums: %s, n: %d", av_sums, n)
     lowest_availability = av_sums[av_sums > 0].min()
     idx_lowest_availabilities = (av_sums == lowest_availability).nonzero()[0]
     idx_first_person = rng.choice(idx_lowest_availabilities)
-    logger.debug(
-        "Chose first person %d with av %d", idx_first_person, lowest_availability
-    )
     assert mask[idx_first_person]
     base_availability = availabilities[idx_first_person]
     group.append(idx_first_person)
@@ -142,7 +139,6 @@ def sample(
     availabilities = update_availabilities_with_mask(availabilities, mask)
     n -= 1
     for _ in range(n):
-        logger.debug("In loop")
         if mask.sum() == 0:
             raise IncompatibleAvailabilities("Mask is all False.")
         joint_availabilities = availabilities & base_availability
@@ -158,9 +154,6 @@ def sample(
             raise IncompatibleAvailabilities
         probs /= probs.sum()
         idx_next_person = rng.choice(len(mask), p=probs)
-        logger.debug(
-            "Chose next person %d with av %d", idx_next_person, av_sums[idx_next_person]
-        )
         base_availability &= availabilities[idx_next_person]
         mask[idx_next_person] = False
         availabilities = update_availabilities_with_mask(availabilities, mask)
@@ -175,14 +168,32 @@ class PairUpResult:
     #: Indices of people that could not be assigned to a group
     removed: set[int]
     #: Join group availabilities as a boolean array of n_people x n_timeslots
-    joint_availabilities: np.ndarray | None = None
+    joint_availabilities: np.ndarray = None  # type: ignore
 
     def __post_init__(self):
-        if self.joint_availabilities is not None:
-            assert len(self.segmentation) == len(self.joint_availabilities)
+        if self.joint_availabilities is None:
+            self.joint_availabilities = np.full((len(self.segmentation), 1), 1)
+        assert len(self.segmentation) == len(self.joint_availabilities)
+
+    @property
+    def av_sums(self) -> np.ndarray:
+        return self.joint_availabilities.sum(axis=1)
+
+    @property
+    def n_removed(self) -> int:
+        return len(self.removed)
+
+    @property
+    def min_av_sum(self) -> int:
+        return self.av_sums.min()
+
+    # todo: Could do weighting
+    @property
+    def mean_av_sum(self) -> float:
+        return self.av_sums.mean()
 
 
-def pair_up(
+def _pair_up(
     sn: SolutionNumbers,
     idx: np.ndarray,
     notwo: np.ndarray,
@@ -190,17 +201,7 @@ def pair_up(
     *,
     rng: np.random.Generator | None = None,
 ) -> PairUpResult:
-    """
-
-    Args:
-        sn:
-        idx:
-        idx_notwo:
-        rng:
-
-    Returns:
-
-    """
+    """ """
     assert sn.n_people == len(idx) == len(notwo)
     mask = np.full_like(idx, True)
     segmentation = []
@@ -222,4 +223,55 @@ def pair_up(
 
     assert mask.sum() == 0
     assert removed | set.union(*segmentation) == set(idx)
-    return PairUpResult(segmentation, removed)
+
+    joint_availabilities: None | np.ndarray = None
+    if availabilities is not None:
+        joint_availabilities = np.array(
+            [np.all(availabilities[list(group)], axis=0) for group in segmentation]
+        )
+
+    return PairUpResult(
+        segmentation, removed, joint_availabilities=joint_availabilities
+    )
+
+
+def pair_up(
+    sn: SolutionNumbers,
+    idx: np.ndarray,
+    notwo: np.ndarray,
+    availabilities: np.ndarray | None = None,
+    *,
+    max_tries=1_000_000,
+    abort_after_stable=100,
+    rng: np.random.Generator | None = None,
+) -> PairUpResult:
+    if availabilities is None:
+        max_tries = 1
+    if os.environ.get("MEETUPMATCHER_TESTING"):
+        max_tries = 3
+    best_solution = None
+    n_tries = 0
+    n_tries_stable = 0
+    best_cost = (-np.inf, -np.inf, -np.inf)
+    logger.info("Starting to look for best solution")
+    while True:
+        n_tries += 1
+        try:
+            solution = _pair_up(sn, idx, notwo, availabilities, rng=rng)
+        except NoSolution:
+            continue
+        cost = (solution.n_removed, solution.min_av_sum, solution.mean_av_sum)
+        if best_solution is None:
+            best_solution = solution
+        if cost > best_cost:
+            best_cost = cost
+            best_solution = solution
+            n_tries_stable = 0
+        else:
+            n_tries_stable += 1
+        best_cost = max(best_cost, cost)
+        if n_tries >= max_tries:
+            break
+        if n_tries_stable >= abort_after_stable:
+            break
+    return best_solution

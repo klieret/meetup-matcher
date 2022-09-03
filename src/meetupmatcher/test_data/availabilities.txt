@@ -1,14 +1,14 @@
-To: email2@sdf.x, email5@sdf.x, email6@sdf.x
+To: email8@sdf.x, email4@sdf.x, email6@sdf.x
 Subject: Tea-time pairing
 
-Dear email2, email5, email6,
+Dear email8, email4, email6,
 
 you have been matched to a meetup!
 
 Here are your details:
 
-* email2 (email: email2@sdf.x)
-* email5 (email: email5@sdf.x)
+* email8 (email: email8@sdf.x)
+* email4 (email: email4@sdf.x)
 * email6 (email: email6@sdf.x)
 
 
@@ -26,18 +26,18 @@ pseudorandom number generator is seed with the week number, you can
 also verify the pseudorandomness of your matched group (though you need the
 list of participants for this).
 --------------------------------------------------------------------------------
-To: email8@sdf.x, email0@sdf.x, email1@sdf.x
+To: email0@sdf.x, email5@sdf.x, email7@sdf.x
 Subject: Tea-time pairing
 
-Dear email8, email0, email1,
+Dear email0, email5, email7,
 
 you have been matched to a meetup!
 
 Here are your details:
 
-* email8 (email: email8@sdf.x)
 * email0 (email: email0@sdf.x)
-* email1 (email: email1@sdf.x)
+* email5 (email: email5@sdf.x)
+* email7 (email: email7@sdf.x)
 
 
 You are now supposed to meet up in the week specified in the invitation. You can go out for tea, coffee, have lunch, take a walk, or do anything else you like.
@@ -54,19 +54,19 @@ pseudorandom number generator is seed with the week number, you can
 also verify the pseudorandomness of your matched group (though you need the
 list of participants for this).
 --------------------------------------------------------------------------------
-To: email9@sdf.x, email3@sdf.x, email4@sdf.x, email7@sdf.x
+To: email9@sdf.x, email2@sdf.x, email3@sdf.x, email1@sdf.x
 Subject: Tea-time pairing
 
-Dear email9, email3, email4, email7,
+Dear email9, email2, email3, email1,
 
 you have been matched to a meetup!
 
 Here are your details:
 
 * email9 (email: email9@sdf.x)
+* email2 (email: email2@sdf.x)
 * email3 (email: email3@sdf.x)
-* email4 (email: email4@sdf.x)
-* email7 (email: email7@sdf.x)
+* email1 (email: email1@sdf.x)
 
 
 You are now supposed to meet up in the week specified in the invitation. You can go out for tea, coffee, have lunch, take a walk, or do anything else you like.

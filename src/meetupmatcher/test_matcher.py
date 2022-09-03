@@ -5,7 +5,6 @@ from pytest import raises
 
 from meetupmatcher.matcher import (
     NoSolution,
-    PairUpResult,
     ProblemStatement,
     SolutionNumbers,
     pair_up,
@@ -47,9 +46,11 @@ def test_not_solvable():
 
 
 def test_pair_up():
-    assert pair_up(
+    r = pair_up(
         SolutionNumbers(partitions=(1, 1, 0), removed=0),
         np.arange(5),
         np.array([False, False, True, True, True]),
         rng=np.random.RandomState(0),
-    ) == PairUpResult([{0, 1}, {2, 3, 4}], set())
+    )
+    assert r.segmentation == [{0, 1}, {2, 3, 4}]
+    assert r.removed == set()

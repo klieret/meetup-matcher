@@ -44,7 +44,6 @@ def main(inputfile: str, dry_run: bool, config: str, seed: str, templates: str) 
         availabilities = people.df[people._availability_product_cols].to_numpy()
     else:
         availabilities = None
-    logger.debug(availabilities)
     paired_up = pair_up(
         solution,
         people.df.index.to_numpy(),

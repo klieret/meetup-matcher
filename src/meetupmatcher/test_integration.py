@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import os
 from pathlib import Path
 
 import pytest
@@ -97,6 +98,7 @@ def test_unspecified_config():
 
 
 if __name__ == "__main__":
+    os.environ["MEETUPMATCHER_TESTING"] = "True"
     # Update all test outputs
     test_pairs = get_test_pairs()
     logger.info(f"Updating {test_pairs} test outputs")
