@@ -40,12 +40,19 @@ def main(inputfile: str, dry_run: bool, config: str, seed: str, templates: str) 
         logger.critical(f"No solution could be found: {e}")
         sys.exit(1)
     logger.info(f"Solution: {solution}")
+    if people._availability_product_cols:
+        availabilities = people.df[people._availability_product_cols].to_numpy()
+    else:
+        availabilities = None
+    logger.debug(availabilities)
     paired_up = pair_up(
         solution,
         people.df.index.to_numpy(),
         people.df.notwo.to_numpy(),
+        availabilities=availabilities,
         rng=rng,
     )
+    logger.info(paired_up)
     mails = list(
         EmailGenerator(template_path=templates).generate_emails(people, paired_up)
     )

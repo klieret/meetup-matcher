@@ -53,7 +53,8 @@ class People:
             for col in availability_cols:
                 for value in availability_values:
                     col_name = f"{col} {value}"
-                    df[col_name] = df[col] == value
+                    # todo: This could be done cleaner...
+                    df[col_name] = df[col].str.contains(value)
                     self._availability_product_cols.append(col_name)
             logger.debug(
                 "Availability product columns: %s",

@@ -7,6 +7,7 @@ from click.testing import CliRunner
 
 from meetupmatcher.main import main
 from meetupmatcher.util.compat_resource import resources
+from meetupmatcher.util.log import logger
 
 test_files_dir = Path(resources.files("meetupmatcher.test_data"))  # type: ignore
 
@@ -25,10 +26,7 @@ def get_test_pairs() -> list[tuple[Path, Path, Path]]:
     expect_files: list[Path] = sorted(
         f
         for f in test_files_dir.iterdir()
-        if f.is_file()
-        and f.name.endswith(".txt")
-        and f.name.startswith("out_")
-        and not f.name.startswith("_")
+        if f.name.endswith(".txt") and not f.name.startswith("_")
     )
     return list(zip(test_files, config_files, expect_files))
 
@@ -84,7 +82,7 @@ def test_specified_template_dir():
     _test_expected_output(
         inpt=tfd / "default.csv",
         config=tfd / "default.yaml",
-        outpt=tfd / "out_default.txt",
+        outpt=tfd / "default.txt",
         additional_args=["--templates", str(template_dir)],
     )
 
@@ -94,13 +92,18 @@ def test_unspecified_config():
     _test_expected_output(
         inpt=tfd / "default.csv",
         config=None,
-        outpt=tfd / "out_default.txt",
+        outpt=tfd / "default.txt",
     )
 
 
 if __name__ == "__main__":
     # Update all test outputs
     test_pairs = get_test_pairs()
+    logger.info(f"Updating {test_pairs} test outputs")
     for csv, config, out in test_pairs:
-        result = _run_command(_build_command(csv, config))
+        logger.info((csv, config, out))
+        command = _build_command(csv, config)
+        logger.info(" ".join(command))
+        result = _run_command(command)
+        logger.info(f"Writing to {out}")
         out.write_text(result.output)
