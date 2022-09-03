@@ -40,6 +40,7 @@ class People:
             logger.debug("Found availability columns: %s", availability_cols)
             availability_values = set()
             for col in availability_cols:
+                df[col] = df[col].fillna("")
                 _vals = (
                     df[col].apply(lambda x: [a.strip() for a in x.split(",")]).tolist()
                 )
