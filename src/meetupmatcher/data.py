@@ -55,6 +55,8 @@ class People:
             )
             for col in availability_cols:
                 for value in availability_values:
+                    if not value.strip():
+                        continue
                     col_name = f"{col} {value}"
                     # todo: This could be done cleaner...
                     df[col_name] = df[col].str.contains(value)

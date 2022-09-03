@@ -12,6 +12,8 @@ Here are your details:
 * name13 (email: email13@sdf.x)
 
 
+
+
 You are now supposed to meet up in the week specified in the invitation. You can go out for tea, coffee, have lunch, take a walk, or do anything else you like.
 
 Please click "reply all", remove the meetup matcher email address, and suggest a few dates/times to your group (or use slack for the same). Alternatively you can also use a website like https://crab.fit/ to settle on the dates/times (the next iteration of the meetup matcher will likely already have a similar feature included).
@@ -38,6 +40,8 @@ Here are your details:
 * name1 (email: email1@sdf.x)
 * name10 (email: email10@sdf.x, slack: slack10)
 * name12 (email: email12@sdf.x, slack: slack12)
+
+
 
 
 You are now supposed to meet up in the week specified in the invitation. You can go out for tea, coffee, have lunch, take a walk, or do anything else you like.
@@ -68,6 +72,8 @@ Here are your details:
 * name11 (email: email11@sdf.x)
 
 
+
+
 You are now supposed to meet up in the week specified in the invitation. You can go out for tea, coffee, have lunch, take a walk, or do anything else you like.
 
 Please click "reply all", remove the meetup matcher email address, and suggest a few dates/times to your group (or use slack for the same). Alternatively you can also use a website like https://crab.fit/ to settle on the dates/times (the next iteration of the meetup matcher will likely already have a similar feature included).
@@ -94,6 +100,8 @@ Here are your details:
 * name14 (email: email14@sdf.x, slack: slack14)
 * name6 (email: email6@sdf.x, slack: slack6)
 * name15 (email: email15@sdf.x)
+
+
 
 
 You are now supposed to meet up in the week specified in the invitation. You can go out for tea, coffee, have lunch, take a walk, or do anything else you like.
@@ -123,6 +131,8 @@ Here are your details:
 * name3 (email: email3@sdf.x)
 * name5 (email: email5@sdf.x)
 * name7 (email: email7@sdf.x)
+
+
 
 
 You are now supposed to meet up in the week specified in the invitation. You can go out for tea, coffee, have lunch, take a walk, or do anything else you like.
