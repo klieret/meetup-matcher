@@ -1,5 +1,5 @@
 To: email0@sdf.x, email4@sdf.x, email13@sdf.x
-Subject: Tea-time pairing
+Subject: Coffee meetup: You have been matched to your group
 
 Dear name0, name4, name13,
 
@@ -29,7 +29,7 @@ also verify the pseudorandomness of your matched group (though you need the
 list of participants for this).
 --------------------------------------------------------------------------------
 To: email1@sdf.x, email10@sdf.x, email12@sdf.x
-Subject: Tea-time pairing
+Subject: Coffee meetup: You have been matched to your group
 
 Dear name1, name10, name12,
 
@@ -59,7 +59,7 @@ also verify the pseudorandomness of your matched group (though you need the
 list of participants for this).
 --------------------------------------------------------------------------------
 To: email8@sdf.x, email9@sdf.x, email11@sdf.x
-Subject: Tea-time pairing
+Subject: Coffee meetup: You have been matched to your group
 
 Dear name8, name9, name11,
 
@@ -89,7 +89,7 @@ also verify the pseudorandomness of your matched group (though you need the
 list of participants for this).
 --------------------------------------------------------------------------------
 To: email6@sdf.x, email14@sdf.x, email15@sdf.x
-Subject: Tea-time pairing
+Subject: Coffee meetup: You have been matched to your group
 
 Dear name6, name14, name15,
 
@@ -119,7 +119,7 @@ also verify the pseudorandomness of your matched group (though you need the
 list of participants for this).
 --------------------------------------------------------------------------------
 To: email2@sdf.x, email3@sdf.x, email5@sdf.x, email7@sdf.x
-Subject: Tea-time pairing
+Subject: Coffee meetup: You have been matched to your group
 
 Dear name2, name3, name5, name7,
 

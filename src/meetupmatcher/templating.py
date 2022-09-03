@@ -37,7 +37,7 @@ class EmailGenerator:
         template = self.environment.get_template("removed.txt.jinja")
         return Email(
             to=[person.email],
-            subject="Tea-time pairing",
+            subject="Coffee meetup",
             content=template.render(name=person["name"]),
         )
 
@@ -56,7 +56,7 @@ class EmailGenerator:
         template = self.environment.get_template("matched.txt.jinja")
         return Email(
             to=group.email.tolist(),
-            subject="Tea-time pairing",
+            subject="Coffee meetup: You have been matched to your group",
             content=template.render(
                 names=group.name.to_list(),
                 people=group,
