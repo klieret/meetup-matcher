@@ -13,15 +13,22 @@ test_files_dir = Path(resources.files("meetupmatcher.test_data"))  # type: ignor
 
 def get_test_pairs() -> list[tuple[Path, Path, Path]]:
     test_files: list[Path] = sorted(
-        f for f in test_files_dir.iterdir() if f.is_file() and f.name.endswith(".csv")
+        f
+        for f in test_files_dir.iterdir()
+        if f.is_file() and f.name.endswith(".csv") and not f.name.startswith("_")
     )
     config_files: list[Path] = sorted(
-        f for f in test_files_dir.iterdir() if f.is_file() and f.name.endswith(".yaml")
+        f
+        for f in test_files_dir.iterdir()
+        if f.is_file() and f.name.endswith(".yaml") and not f.name.startswith("_")
     )
     expect_files: list[Path] = sorted(
         f
         for f in test_files_dir.iterdir()
-        if f.is_file() and f.name.endswith(".txt") and f.name.startswith("out_")
+        if f.is_file()
+        and f.name.endswith(".txt")
+        and f.name.startswith("out_")
+        and not f.name.startswith("_")
     )
     return list(zip(test_files, config_files, expect_files))
 
