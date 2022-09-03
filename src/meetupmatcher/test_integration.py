@@ -33,15 +33,11 @@ def get_test_pairs() -> list[tuple[Path, Path, Path]]:
     return list(zip(test_files, config_files, expect_files))
 
 
-def _test_expected_output(
-    inpt: Path,
-    config: Path | None,
-    outpt: Path,
-    additional_args: list[str] | None = None,
+def _build_command(
+    inpt: Path, config: Path | None, additional_args: list[str] | None = None
 ):
     if additional_args is None:
         additional_args = []
-    runner = CliRunner(mix_stderr=False)
     command = [
         "--dry-run",
         "--seed",
@@ -51,11 +47,28 @@ def _test_expected_output(
     if config is not None:
         command.extend(["--config", str(config)])
     command.extend(additional_args)
-    result = runner.invoke(
+    return command
+
+
+def _run_command(command: list[str]):
+    runner = CliRunner(mix_stderr=False)
+    return runner.invoke(
         main,
         command,
         catch_exceptions=False,
     )
+
+
+def _test_expected_output(
+    inpt: Path,
+    config: Path | None,
+    outpt: Path,
+    additional_args: list[str] | None = None,
+):
+    if additional_args is None:
+        additional_args = []
+    command = _build_command(inpt, config, additional_args)
+    result = _run_command(command)
     assert result.exit_code == 0
     assert result.output == outpt.read_text()
 
@@ -83,3 +96,11 @@ def test_unspecified_config():
         config=None,
         outpt=tfd / "out_default.txt",
     )
+
+
+if __name__ == "__main__":
+    # Update all test outputs
+    test_pairs = get_test_pairs()
+    for csv, config, out in test_pairs:
+        result = _run_command(_build_command(csv, config))
+        out.write_text(result.output)
