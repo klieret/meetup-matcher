@@ -12,6 +12,10 @@ class NoSolution(Exception):
     pass
 
 
+class IncompatibleAvailabilities(NoSolution):
+    pass
+
+
 @dataclass
 class ProblemStatement:
     """All information required to determine the number of groups"""
@@ -86,6 +90,65 @@ def sample(
     if rng is None:
         rng = np.random.RandomState()
     return set(rng.choice(list(source), size=n, replace=False))
+
+
+def sample_with_availabilities(
+    source: np.ndarray,
+    n: int,
+    availabilities: np.ndarray | None = None,
+    rng: np.random.Generator | None = None,
+    max_joint_av_boon=5,
+    wasted_resource_offset=3,
+) -> set[int]:
+    """
+
+    Args:
+        source:
+        n:
+        availabilities:
+        rng:
+        max_joint_av_boon: This limits the probability boost for joint availabilities.
+        wasted_resource_offset: The lower this parameter, the more we punish people with
+            many availabilities being assigned to a group where the joint availability
+            does not "profit from it"
+
+    Returns:
+
+    """
+    if rng is None:
+        rng = np.random.RandomState()
+    if availabilities is None:
+        return sample(source=source, n=n, rng=rng)
+    group = []
+    av_sums: np.ndarray = np.sum(availabilities, axis=1)
+    idx_lowest_availabilities = (av_sums == av_sums.min()).nonzero()[0]
+    idx_first_person = rng.choice(idx_lowest_availabilities)
+    base_availability = availabilities[idx_first_person]
+    group.append(source[idx_first_person])
+    source = np.delete(source, idx_first_person)
+    availabilities = np.delete(availabilities, idx_first_person, axis=0)
+    n -= 1
+    print(base_availability.shape)
+    for _ in range(n):
+        joint_availabilities = availabilities & base_availability
+        av_sums = np.sum(availabilities, axis=1)
+        joint_av_sums = np.sum(joint_availabilities, axis=1)
+        probs = np.min((np.ones_like(joint_av_sums), joint_av_sums), axis=0) * (
+            np.min(
+                (np.full_like(joint_av_sums, max_joint_av_boon), joint_av_sums), axis=0
+            )
+            / (wasted_resource_offset + av_sums)
+        )
+        try:
+            probs /= probs.sum()
+        except ZeroDivisionError:
+            raise IncompatibleAvailabilities
+        idx_next_person = rng.choice(len(source), p=probs)
+        base_availability &= availabilities[idx_next_person]
+        group.append(source[idx_next_person])
+        availabilities = np.delete(availabilities, idx_next_person, axis=0)
+        source = np.delete(source, idx_next_person)
+    return set(group)
 
 
 @dataclass
