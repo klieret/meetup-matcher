@@ -13,7 +13,12 @@ You are all available at the following times:
 {% for a in availabilities -%}
 * {{ a }}
 {% endfor %}
-{% endif %}
+{% endif -%}
+
+{% for _, p in people.iterrows() -%}
+{% if p["message"] -%} Message added by {{ p["name"] }}: {{ p["message"] }}
+{% endif -%}
+{% endfor %}
 
 You are now supposed to meet up in the week specified in the invitation. You can go out for tea, coffee, have lunch, take a walk, or do anything else you like.
 

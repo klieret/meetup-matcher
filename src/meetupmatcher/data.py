@@ -28,6 +28,11 @@ class People:
                 df.rename(columns={source: target}, inplace=True)
         if "notwo_truthy" in config:
             df.notwo = df.notwo == config["notwo_truthy"]
+        print(df.columns)
+        if "message" not in df.columns:
+            df["message"] = ""
+        df.message = df.message.fillna("")
+        df.message = df.message.str.strip()
         if "name" not in df.columns:
             df["name"] = df.email.apply(lambda x: x.split("@")[0])
         if "slack" not in df.columns:

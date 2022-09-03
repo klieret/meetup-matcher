@@ -3,6 +3,7 @@
 #  email: "Your email"
 #  slack: "Slack ID (optional)"
 #  notwo: "If having at least three people in your group is a deal-breaker for you, please tick the following box."
+#  message: "Any message to your group?"
 #notwo_truthy: "Please match me with at least two more people"
 #availabilities:
 #  columns:
