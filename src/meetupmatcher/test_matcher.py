@@ -46,7 +46,7 @@ def test_not_solvable():
 
 
 def test_pair_up():
-    r = pair_up(
+    r, _ = pair_up(
         SolutionNumbers(partitions=(1, 1, 0), removed=0),
         np.arange(5),
         np.array([False, False, True, True, True]),

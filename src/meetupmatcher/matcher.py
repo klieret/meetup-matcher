@@ -1,10 +1,12 @@
 from __future__ import annotations
 
+import dataclasses
 import os
 from dataclasses import dataclass
 from typing import TypeVar
 
 import numpy as np
+import pandas as pd
 
 from meetupmatcher.util.log import logger
 
@@ -235,6 +237,13 @@ def _pair_up(
     )
 
 
+@dataclasses.dataclass
+class PairUpStatistics:
+    df: pd.DataFrame
+    best: tuple[float, float, float]
+    solution_pair_avs: np.ndarray
+
+
 def pair_up(
     sn: SolutionNumbers,
     idx: np.ndarray,
@@ -244,7 +253,7 @@ def pair_up(
     max_tries=1_000_000,
     abort_after_stable=100,
     rng: np.random.Generator | None = None,
-) -> PairUpResult:
+) -> tuple[PairUpResult, PairUpStatistics]:
     if availabilities is None:
         max_tries = 1
     if os.environ.get("MEETUPMATCHER_TESTING"):
@@ -254,6 +263,7 @@ def pair_up(
     n_tries_stable = 0
     best_cost = (-np.inf, -np.inf, -np.inf)
     logger.info("Starting to look for best solution")
+    costs = []
     while True:
         n_tries += 1
         try:
@@ -270,8 +280,13 @@ def pair_up(
         else:
             n_tries_stable += 1
         best_cost = max(best_cost, cost)
+        costs.append(cost)
         if n_tries >= max_tries:
             break
         if n_tries_stable >= abort_after_stable:
             break
-    return best_solution
+    return best_solution, PairUpStatistics(
+        pd.DataFrame(costs, columns=["removed", "min_av_sum", "mean_av_sum"]),
+        best=best_cost,
+        solution_pair_avs=best_solution.joint_availabilities,
+    )

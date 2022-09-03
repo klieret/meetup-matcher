@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import pickle
 import sys
 
 import click
@@ -18,6 +19,7 @@ from meetupmatcher.util.log import logger
 @click.argument("inputfile")
 @click.option("-n", "--dry-run", is_flag=True, help="Don't send emails")
 @click.option("-c", "--config", help="Configuration file", default=None, type=str)
+@click.option("--matching-stats", help="Export statistics from matching process")
 @click.option(
     "-s",
     "--seed",
@@ -30,7 +32,14 @@ from meetupmatcher.util.log import logger
 @click.option(
     "-t", "--templates", help="Path to template directory", default=None, type=str
 )
-def main(inputfile: str, dry_run: bool, config: str, seed: str, templates: str) -> None:
+def main(
+    inputfile: str,
+    dry_run: bool,
+    config: str,
+    seed: str,
+    templates: str,
+    matching_stats="",
+) -> None:
     rng = get_rng_from_option(seed)
     logger.debug(f"Reading from {inputfile}")
     people = People(pd.read_csv(inputfile), config=Config(config))
@@ -44,13 +53,16 @@ def main(inputfile: str, dry_run: bool, config: str, seed: str, templates: str) 
         availabilities = people.df[people._availability_product_cols].to_numpy()
     else:
         availabilities = None
-    paired_up = pair_up(
+    paired_up, statistics = pair_up(
         solution,
         people.df.index.to_numpy(),
         people.df.notwo.to_numpy(),
         availabilities=availabilities,
         rng=rng,
     )
+    if matching_stats:
+        with open(matching_stats, "wb") as f:
+            pickle.dump(statistics, f)
     logger.info(paired_up)
     mails = list(
         EmailGenerator(template_path=templates).generate_emails(people, paired_up)
