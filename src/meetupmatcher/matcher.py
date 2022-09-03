@@ -12,6 +12,10 @@ class NoSolution(Exception):
     pass
 
 
+class TooFewPeople(NoSolution):
+    pass
+
+
 class IncompatibleAvailabilities(NoSolution):
     pass
 
@@ -51,10 +55,10 @@ class SolutionNumbers:
 
 def _solve_numeric(ps: ProblemStatement) -> SolutionNumbers:
     if ps.n_people < 2:
-        raise NoSolution
+        raise TooFewPeople
     elif ps.n_people == 2:
         if ps.n_notwo:
-            raise NoSolution
+            raise TooFewPeople
         else:
             return SolutionNumbers((1, 0, 0))
     elif ps.n_people == 3:
@@ -100,11 +104,12 @@ def sample_with_availabilities(
     max_joint_av_boon=5,
     wasted_resource_offset=3,
 ) -> set[int]:
-    """
+    """Put people in a group of fixed size in a way that helps to maximize the number
+    of joint availabilities of each group in the ent.
 
     Args:
-        source:
-        n:
+        source: Sample from here
+        n: Sample/group size
         availabilities:
         rng:
         max_joint_av_boon: This limits the probability boost for joint availabilities.
@@ -113,7 +118,7 @@ def sample_with_availabilities(
             does not "profit from it"
 
     Returns:
-
+        Set of indices of people belonging into group
     """
     if rng is None:
         rng = np.random.RandomState()
@@ -153,8 +158,16 @@ def sample_with_availabilities(
 
 @dataclass
 class PairUpResult:
+    #: List of groups given as sets of indices
     segmentation: list[set[int]]
+    #: Indices of people that could not be assigned to a group
     removed: set[int]
+    #: Join group availabilities as a boolean array of n_people x n_timeslots
+    joint_availabilities: np.ndarray | None = None
+
+    def __post_init__(self):
+        if self.joint_availabilities is not None:
+            assert len(self.segmentation) == len(self.joint_availabilities)
 
 
 def pair_up(
@@ -163,6 +176,17 @@ def pair_up(
     idx_notwo: set[int],
     rng: np.random.Generator | None = None,
 ) -> PairUpResult:
+    """
+
+    Args:
+        sn:
+        idx:
+        idx_notwo:
+        rng:
+
+    Returns:
+
+    """
     assert sn.n_people == len(idx) + len(idx_notwo)
 
     segmentation = []
