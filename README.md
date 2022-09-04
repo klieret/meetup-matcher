@@ -17,7 +17,7 @@ A script to facilitate networking by matching people for meetups in small groups
 
 This works in three steps:
 
-1. You obtain a list of email addresses of everyone interested
+1. You obtain a list of email addresses of everyone interested, optionally together with availabilities and extra information
 2. You run this script to match groups of three[^1] people together and to send them an email
 3. Each group decides what to do, and where and when to meet on their own.
 
