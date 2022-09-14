@@ -36,10 +36,16 @@ This optimization problem reminds of the 3-dimensional version of the [stable ro
 Currently, the optimization is performed by sampling the possibility space with heuristic weights:
 
 1. Take the participant of lowest availability to start a group.
-2. Iteratively add participants until the group size is reached. The probability for each participant is adjusted based on the joint availability with the already existing group members. It increases with high joint availability but also decreases when the participant would "waste" a lot of their availabilities.
+2. Iteratively add participants until the group size is reached. The probability for each participant is adjusted based on the joint availability with the already existing group members. It increases with high joint availability but also decreases when the participant would "waste" a lot of their availabilities (see below).
 3. Step 1-2 are repeated until all groups are formed.
 4. The global cost function is calculated for all groups.
 5. Steps 1-4 are repeated many times to sample the possibility space.
+
+To be precise, the weight from step 2 is currently chosen to be
+
+<img src="readme_assets/weight.png" width="250px">
+
+where G represents the indices of the already added group members and A denotes the availabilities as a set.
 
 ## 📦 Installation
 
