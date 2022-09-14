@@ -60,6 +60,7 @@ def main(
         availabilities=availabilities,
         rng=rng,
     )
+    logger.info(f"Best cost function: {statistics.best}")
     if matching_stats:
         with open(matching_stats, "wb") as f:
             pickle.dump(statistics, f)
