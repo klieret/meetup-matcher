@@ -29,6 +29,7 @@ from meetupmatcher.util.log import logger
     default="week",
     show_default=True,
 )
+@click.option("--dump-mails", help="Dump emails to file")
 @click.option(
     "-t", "--templates", help="Path to template directory", default=None, type=str
 )
@@ -39,6 +40,7 @@ def main(
     seed: str,
     templates: str,
     matching_stats="",
+    dump_mails="",
 ) -> None:
     rng = get_rng_from_option(seed)
     logger.debug(f"Reading from {inputfile}")
@@ -68,7 +70,7 @@ def main(
     mails = list(
         EmailGenerator(template_path=templates).generate_emails(people, paired_up)
     )
-    YagmailSender(dry_run).send(mails)
+    YagmailSender(dry_run, dump_file=dump_mails).send(mails)
 
 
 if __name__ == "__main__":
