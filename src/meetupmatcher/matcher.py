@@ -146,12 +146,9 @@ def sample(
         joint_availabilities = availabilities & base_availability
         av_sums = np.sum(availabilities, axis=1)
         joint_av_sums = np.sum(joint_availabilities, axis=1)
-        probs = np.min((np.ones_like(joint_av_sums), joint_av_sums), axis=0) * (
-            np.min(
-                (np.full_like(joint_av_sums, max_joint_av_boon), joint_av_sums), axis=0
-            )
-            / (wasted_resource_offset + av_sums)
-        )
+        probs = np.min(
+            (np.full_like(joint_av_sums, max_joint_av_boon), joint_av_sums), axis=0
+        ) / (wasted_resource_offset + av_sums)
         if probs.sum() == 0:
             raise IncompatibleAvailabilities
         probs /= probs.sum()
