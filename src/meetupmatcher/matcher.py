@@ -279,8 +279,12 @@ def pair_up(
         best_cost = max(best_cost, cost)
         costs.append(cost)
         if n_tries >= max_tries:
+            logger.info("Reached max tries (%d)", max_tries)
             break
         if n_tries_stable >= abort_after_stable:
+            logger.info(
+                "Reached stable tries (%d) after %d tries", abort_after_stable, n_tries
+            )
             break
     return best_solution, PairUpStatistics(
         pd.DataFrame(costs, columns=["removed", "min_av_sum", "mean_av_sum"]),
