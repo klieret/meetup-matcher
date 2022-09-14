@@ -3,6 +3,7 @@
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
+[![Documentation Status](https://readthedocs.org/projects/meetup-matcher/badge/?version=latest)](https://meetup-matcher.readthedocs.io/en/latest/?badge=latest)
 [![PR welcome](https://img.shields.io/badge/PR-Welcome-%23FF8300.svg)](https://git-scm.com/book/en/v2/GitHub-Contributing-to-a-Project)
 [![License](https://img.shields.io/github/license/klieret/meetup-matcher)](https://github.com/klieret/meetup-matcher/blob/master/LICENSE.txt)
 <!-- [![Documentation Status](https://readthedocs.org/projects/meetup-matcher/badge/?version=latest)](https://meetup-matcher.readthedocs.io/) -->
@@ -46,6 +47,7 @@ To be precise, the weight from step 2 is currently chosen to be
 <img src="readme_assets/weight.png" width="250px">
 
 where G represents the indices of the already added group members and A denotes the availabilities as a set.
+The numbers 5 and 3 have been heuristically chosen. 
 
 ## 📦 Installation
 
@@ -58,11 +60,13 @@ pip3 install .
 ## 🔥 Running the command line tool
 
 After your installation you should have a `meetup-matcher` command in your path.
-Run
+A very simple run looks like
 
 ```bash
 meetup-matcher your-input.csv
 ```
+
+for more information, see [the documentation](https://meetup-matcher.readthedocs.io/en/latest/).
 
 ## 🧰 Development setup
 
