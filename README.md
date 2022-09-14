@@ -47,7 +47,7 @@ To be precise, the weight from step 2 is currently chosen to be
 ![weight formula](https://latex.codecogs.com/svg.image?p_k&space;=&space;\frac{\min(5,&space;|\bigcap&space;_{j\in&space;G&space;\cup&space;\{k\}}&space;A_j|)}{3&plus;|A_k|})
 
 where G represents the indices of the already added group members and A denotes the availabilities as a set.
-The numbers 5 and 3 have been heuristically chosen. 
+The numbers 5 and 3 have been heuristically chosen.
 
 ## 📦 Installation
 
