@@ -3,6 +3,7 @@ from __future__ import annotations
 import getpass
 import time
 from abc import ABC, abstractmethod
+from pathlib import Path, PurePath
 
 import yagmail
 
@@ -11,8 +12,15 @@ from meetupmatcher.util.log import logger
 
 
 class MailSender(ABC):
-    def __init__(self, dry_run: bool = True):
+    def __init__(self, dry_run: bool = True, dump_file: str | PurePath | None = None):
+        """
+
+        Args:
+            dry_run:
+            dump_file: If dry run, dump into this file instead of printing
+        """
         self.dry_run = dry_run
+        self.dump_file = Path(dump_file) if dump_file is not None else None
 
     def send(self, emails: list[Email]) -> None:
         if self.dry_run:
@@ -27,9 +35,13 @@ class MailSender(ABC):
     def _send(self, emails: list[Email]) -> None:
         pass
 
-    @staticmethod
-    def send_dry_run(emails: list[Email]) -> None:
-        print(("\n" + "-" * 80 + "\n").join([mail.to_str() for mail in emails]))
+    def send_dry_run(self, emails: list[Email]) -> None:
+        dump = ("\n" + "-" * 80 + "\n").join([mail.to_str() for mail in emails])
+        if self.dump_file:
+            with self.dump_file.open("w") as f:
+                f.write(dump)
+        else:
+            print(dump)
 
 
 class YagmailSender(MailSender):
