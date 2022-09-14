@@ -15,7 +15,7 @@
 
 A script to facilitate networking by matching people for meetups in small groups.
 
-This works in three steps:
+Setting up a meetup works as follows:
 
 1. You obtain a list of email addresses of everyone interested, optionally together with availabilities and extra information
 2. You run this script to match groups of three people together and to send them an email
@@ -37,8 +37,8 @@ Currently, the optimization is performed by sampling the possibility space with 
 
 1. Take the participant of lowest availability to start a group.
 2. Iteratively add participants until the group size is reached. The probability for each participant is adjusted based on the joint availability with the already existing group members. It increases with high joint availability but also decreases when the participant would "waste" a lot of their availabilities.
-3. Step 1-2 are repeated until all groups are formed
-4. The global cost function is calculated for all groups
+3. Step 1-2 are repeated until all groups are formed.
+4. The global cost function is calculated for all groups.
 5. Steps 1-4 are repeated many times to sample the possibility space.
 
 ## 📦 Installation
