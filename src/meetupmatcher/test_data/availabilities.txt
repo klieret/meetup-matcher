@@ -1,19 +1,20 @@
-To: email4@sdf.x, email6@sdf.x, email8@sdf.x
+To: email0@sdf.x, email2@sdf.x, email6@sdf.x
 Subject: Coffee meetup: You have been matched to your group
 
-Dear email4, email6, email8,
+Dear email0, email2, email6,
 
 you have been matched to a meetup!
 
 Here are your details:
 
-* email4 (email: email4@sdf.x)
+* email0 (email: email0@sdf.x)
+* email2 (email: email2@sdf.x)
 * email6 (email: email6@sdf.x)
-* email8 (email: email8@sdf.x)
 
 
 You are all available at the following times:
-* Afternoon Friday
+* Afternoon Wednesday
+* Lunch Tuesday
 
 
 
@@ -31,24 +32,22 @@ pseudorandom number generator is seed with the week number, you can
 also verify the pseudorandomness of your matched group (though you need the
 list of participants for this).
 --------------------------------------------------------------------------------
-To: email0@sdf.x, email5@sdf.x, email7@sdf.x
+To: email1@sdf.x, email5@sdf.x, email8@sdf.x
 Subject: Coffee meetup: You have been matched to your group
 
-Dear email0, email5, email7,
+Dear email1, email5, email8,
 
 you have been matched to a meetup!
 
 Here are your details:
 
-* email0 (email: email0@sdf.x)
+* email1 (email: email1@sdf.x)
 * email5 (email: email5@sdf.x)
-* email7 (email: email7@sdf.x)
+* email8 (email: email8@sdf.x)
 
 
 You are all available at the following times:
 * Afternoon Wednesday
-* Lunch Friday
-* Lunch Monday
 * Lunch Wednesday
 
 
@@ -67,25 +66,24 @@ pseudorandom number generator is seed with the week number, you can
 also verify the pseudorandomness of your matched group (though you need the
 list of participants for this).
 --------------------------------------------------------------------------------
-To: email1@sdf.x, email2@sdf.x, email3@sdf.x, email9@sdf.x
+To: email3@sdf.x, email4@sdf.x, email7@sdf.x, email9@sdf.x
 Subject: Coffee meetup: You have been matched to your group
 
-Dear email1, email2, email3, email9,
+Dear email3, email4, email7, email9,
 
 you have been matched to a meetup!
 
 Here are your details:
 
-* email1 (email: email1@sdf.x)
-* email2 (email: email2@sdf.x)
 * email3 (email: email3@sdf.x)
+* email4 (email: email4@sdf.x)
+* email7 (email: email7@sdf.x)
 * email9 (email: email9@sdf.x)
 
 
 You are all available at the following times:
-* Afternoon Wednesday
-* Lunch Monday
-* Lunch Thursday
+* Afternoon Saturday
+* Afternoon Thursday
 
 
 
