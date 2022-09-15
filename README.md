@@ -32,13 +32,15 @@ The overwhelming majority of participants prefers groups of three and a non-negl
 
 If availabilities are surveyed in the sign-up form, then the groups are matched based on these availabilities. This means optimizing an objective function of the mutual availabilities of each group. More weight is given to avoiding groups of very low mutual availabilities.
 
-This optimization problem reminds of the 3-dimensional version of the [stable roommates problem](https://en.wikipedia.org/wiki/Stable_roommates_problem).
+This optimization problem reminds of the 3-dimensional version of the [stable roommates problem](https://en.wikipedia.org/wiki/Stable_roommates_problem), however the optimization goal does not necessarily lead to stable matches.
+
+To be precise, the objective function is the tuple of number of removed people, number of groups with one joint availability, number of groups with two joint availabilities, etc.
 
 Currently, the optimization is performed by sampling the possibility space with heuristic weights:
 
 1. Take the participant of lowest availability to start a group.
 2. Iteratively add participants until the group size is reached. The probability for each participant is adjusted based on the joint availability with the already existing group members. It increases with high joint availability but also decreases when the participant would "waste" a lot of their availabilities (see below).
-3. Step 1-2 are repeated until all groups are formed.
+3. Step 1-2 are repeated until all groups are formed or until we know that we are doing worse than the best solution found so far. In practice, only a very very small[^1] percentage of trials form all groups. This greatly speeds up the sampling process.
 4. The global cost function is calculated for all groups.
 5. Steps 1-4 are repeated many times to sample the possibility space.
 
@@ -48,6 +50,8 @@ To be precise, the weight from step 2 is currently chosen to be
 
 where G represents the indices of the already added group members and A denotes the availabilities as a set.
 The numbers 5 and 3 have been heuristically chosen.
+
+[^1]: For a recent matching with 50 participants, 200k trials were performed, but only 16 of them were built completely.
 
 ## 📦 Installation
 
