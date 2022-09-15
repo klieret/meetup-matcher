@@ -40,7 +40,7 @@ Currently, the optimization is performed by sampling the possibility space with 
 
 1. Take the participant of lowest availability to start a group.
 2. Iteratively add participants until the group size is reached. The probability for each participant is adjusted based on the joint availability with the already existing group members. It increases with high joint availability but also decreases when the participant would "waste" a lot of their availabilities (see below).
-3. Step 1-2 are repeated until all groups are formed or until we know that we are doing worse than the best solution found so far. In practice, only a very very small[^1] percentage of trials form all groups. This greatly speeds up the sampling process.
+3. Step 1-2 are repeated until all groups are formed or until we know that we are doing worse than the best solution found so far (this is very simple because of the lexicographical ordering). As a result, only a very, very small[^1] percentage of trials forms all groups. This greatly speeds up the sampling process.
 4. The global cost function is calculated for all groups.
 5. Steps 1-4 are repeated many times to sample the possibility space.
 
