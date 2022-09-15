@@ -286,6 +286,7 @@ def pair_up(
 ) -> tuple[PairUpResult, PairUpStatistics]:
     if availabilities is None:
         max_tries = 1
+        availabilities = np.full((len(idx), 1), 1)
     if os.environ.get("MEETUPMATCHER_TESTING"):
         max_tries = 3
     best_solution = None
