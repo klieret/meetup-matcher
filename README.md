@@ -34,7 +34,7 @@ If availabilities are surveyed in the sign-up form, then the groups are matched 
 
 This optimization problem reminds of the 3-dimensional version of the [stable roommates problem](https://en.wikipedia.org/wiki/Stable_roommates_problem), however the optimization goal does not necessarily lead to stable matches.
 
-To be precise, the objective function is the tuple of number of removed people, number of groups with one joint availability, number of groups with two joint availabilities, etc.
+To be precise, the objective function is the tuple of number of removed people, number of groups with one joint availability, number of groups with two joint availabilities, etc. [Lexicographically ordering](https://en.wikipedia.org/wiki/Lexicographic_order) is applied to the tuples, that is, `(0, 1, 2, 3) < (0, 1, 3, 2)`, etc. 
 
 Currently, the optimization is performed by sampling the possibility space with heuristic weights:
 
