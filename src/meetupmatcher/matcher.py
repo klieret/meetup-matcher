@@ -93,14 +93,25 @@ def solve_numeric(ps: ProblemStatement) -> SolutionNumbers:
     return s
 
 
+def lexicographic_greater(a: np.ndarray, b: np.ndarray) -> bool:
+    """Return True if a is lexicographically greater than b"""
+    # Numpy 2.0 will likely have a fast "first nonzero" function, see
+    # https://github.com/numpy/numpy/issues/2269
+    if (a == b).all():
+        return False
+    idx = np.where(a != b)[0][0]
+    return a[idx] > b[idx]
+
+
 def sample(
     mask: np.ndarray,
     n: int,
     availabilities: np.ndarray | None = None,
+    *,
     rng: np.random.Generator | None = None,
     max_joint_av_boon=5,
     wasted_resource_offset=3,
-) -> np.ndarray:
+) -> tuple[np.ndarray, int]:
     """Put people in a group of fixed size in a way that helps to maximize the number
     of joint availabilities of each group in the ent.
 
@@ -115,10 +126,10 @@ def sample(
             does not "profit from it"
 
     Returns:
-        Set of indices of people belonging into group
+        Set of indices of people belonging into group, joint availabilities
     """
     if n == 0:
-        return np.array([], dtype="int")
+        return np.array([], dtype="int"), 0
     if rng is None:
         rng = np.random.RandomState()
     if availabilities is None:
@@ -140,6 +151,7 @@ def sample(
     mask[idx_first_person] = False
     availabilities = update_availabilities_with_mask(availabilities, mask)
     n -= 1
+    assert n >= 1
     for _ in range(n):
         if mask.sum() == 0:
             raise IncompatibleAvailabilities("Mask is all False.")
@@ -157,7 +169,7 @@ def sample(
         mask[idx_next_person] = False
         availabilities = update_availabilities_with_mask(availabilities, mask)
         group.append(idx_next_person)
-    return np.array(group)
+    return np.array(group), base_availability.sum()
 
 
 @dataclass
@@ -166,6 +178,8 @@ class PairUpResult:
     segmentation: list[set[int]]
     #: Indices of people that could not be assigned to a group
     removed: set[int]
+    # todo: doc
+    cost: np.ndarray
     #: Join group availabilities as a boolean array of n_people x n_timeslots
     joint_availabilities: np.ndarray = None  # type: ignore
 
@@ -186,7 +200,6 @@ class PairUpResult:
     def min_av_sum(self) -> int:
         return self.av_sums.min()
 
-    # todo: Could do weighting
     @property
     def mean_av_sum(self) -> float:
         return self.av_sums.mean()
@@ -196,29 +209,49 @@ def _pair_up(
     sn: SolutionNumbers,
     idx: np.ndarray,
     notwo: np.ndarray,
+    best_cost: np.ndarray,
     availabilities: np.ndarray | None = None,
     *,
     rng: np.random.Generator | None = None,
-) -> PairUpResult:
-    """ """
+) -> PairUpResult | None:
+    """
+
+    Args:
+        sn:
+        idx:
+        notwo:
+        best_cost:
+        availabilities:
+        rng:
+
+    Returns:
+        None if we abort early because the current solution is worse than the best
+    """
     assert sn.n_people == len(idx) == len(notwo)
     mask = np.full_like(idx, True)
     segmentation = []
-    removed_idxs = sample(mask, n=sn.removed, rng=rng)
+    removed_idxs, _ = sample(mask, n=sn.removed, rng=rng)
     removed = set(idx[removed_idxs])
     mask[removed_idxs] = False
+    cost = np.zeros_like(best_cost)
+    cost[0] += sn.removed
     for i in range(3):
         group_size = i + 2
         n_groups = sn.partitions[i]
+
         for _ in range(n_groups):
             this_mask = mask.copy()
             if group_size == 2:
                 this_mask[notwo] = False
-            new_group_idx = sample(
+            new_group_idx, n_joint_availabilities = sample(
                 this_mask, availabilities=availabilities, n=group_size, rng=rng
             )
             mask[new_group_idx] = False
             segmentation.append(set(idx[new_group_idx]))
+            cost[n_joint_availabilities] += 1
+            if lexicographic_greater(cost, best_cost):
+                # Abort early
+                return None
 
     assert mask.sum() == 0
     assert removed | set.union(*segmentation) == set(idx)
@@ -230,14 +263,14 @@ def _pair_up(
         )
 
     return PairUpResult(
-        segmentation, removed, joint_availabilities=joint_availabilities
+        segmentation, removed, joint_availabilities=joint_availabilities, cost=cost
     )
 
 
 @dataclasses.dataclass
 class PairUpStatistics:
     df: pd.DataFrame
-    best: tuple[float, float, float]
+    best: np.ndarray
     solution_pair_avs: np.ndarray
 
 
@@ -247,8 +280,8 @@ def pair_up(
     notwo: np.ndarray,
     availabilities: np.ndarray | None = None,
     *,
-    max_tries=1_000_000,
-    abort_after_stable=100,
+    max_tries=1000_000,
+    abort_after_stable=100_000,
     rng: np.random.Generator | None = None,
 ) -> tuple[PairUpResult, PairUpStatistics]:
     if availabilities is None:
@@ -258,26 +291,35 @@ def pair_up(
     best_solution = None
     n_tries = 0
     n_tries_stable = 0
-    best_cost = (-np.inf, -np.inf, -np.inf)
+    max_availability = np.max(np.sum(availabilities, axis=1))
+    best_cost = np.full(max_availability + 1, 0, dtype="int")
+    best_cost[0] = sn.n_people
     logger.info("Starting to look for best solution")
     costs = []
+    n_full_tries = 0
     while True:
         n_tries += 1
         try:
-            solution = _pair_up(sn, idx, notwo, availabilities, rng=rng)
+            solution = _pair_up(sn, idx, notwo, best_cost, availabilities, rng=rng)
         except NoSolution:
             continue
-        cost = (solution.n_removed, solution.min_av_sum, solution.mean_av_sum)
+        if solution is None:
+            # stopped early
+            n_tries_stable += 1
+            continue
         if best_solution is None:
             best_solution = solution
-        if cost > best_cost:
-            best_cost = cost
+        if lexicographic_greater(best_cost, solution.cost):
+            best_cost = solution.cost
             best_solution = solution
             n_tries_stable = 0
         else:
             n_tries_stable += 1
-        best_cost = max(best_cost, cost)
-        costs.append(cost)
+        n_full_tries += 1
+        logger.debug(
+            f"tries={n_tries:>10}, full tries={n_full_tries:>3}, best={solution.cost}"
+        )
+        costs.append(solution.cost)
         if n_tries >= max_tries:
             logger.info("Reached max tries (%d)", max_tries)
             break
@@ -287,7 +329,7 @@ def pair_up(
             )
             break
     return best_solution, PairUpStatistics(
-        pd.DataFrame(costs, columns=["removed", "min_av_sum", "mean_av_sum"]),
+        pd.DataFrame(costs),
         best=best_cost,
         solution_pair_avs=best_solution.joint_availabilities,
     )
