@@ -4,14 +4,11 @@ import dataclasses
 import os
 import timeit
 from dataclasses import dataclass
-from typing import TypeVar
 
 import numpy as np
 import pandas as pd
 
 from meetupmatcher.util.log import logger
-
-T = TypeVar("T")
 
 
 class NoSolution(Exception):
