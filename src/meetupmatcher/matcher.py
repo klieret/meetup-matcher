@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import dataclasses
 import os
+import timeit
 from dataclasses import dataclass
 from typing import TypeVar
 
@@ -298,6 +299,7 @@ def pair_up(
     logger.info("Starting to look for best solution")
     costs = []
     n_full_tries = 0
+    t = timeit.default_timer()
     while True:
         if n_tries > max_tries:
             logger.info("Reached max tries (%d)", max_tries)
@@ -329,6 +331,8 @@ def pair_up(
             f"tries={n_tries:>10}, full tries={n_full_tries:>3}, best={solution.cost}"
         )
         costs.append(solution.cost)
+    elapsed = timeit.default_timer() - t
+    logger.info(f"Searched for {elapsed:,} seconds.")
     assert best_solution is not None
     return best_solution, PairUpStatistics(
         pd.DataFrame(costs),
