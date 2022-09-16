@@ -15,6 +15,11 @@ author = "Kilian Lieret"
 
 extensions = ["sphinx_click"]
 
+extensions.append("autoapi.extension")
+
+autoapi_type = "python"
+autoapi_dirs = ["../../src/meetupmatcher"]
+
 templates_path = ["_templates"]
 exclude_patterns = []
 
