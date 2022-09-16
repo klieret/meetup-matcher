@@ -299,6 +299,14 @@ def pair_up(
     costs = []
     n_full_tries = 0
     while True:
+        if n_tries > max_tries:
+            logger.info("Reached max tries (%d)", max_tries)
+            break
+        if n_tries_stable > abort_after_stable:
+            logger.info(
+                "Reached stable tries (%d) after %d tries", abort_after_stable, n_tries
+            )
+            break
         n_tries += 1
         try:
             solution = _pair_up(sn, idx, notwo, best_cost, availabilities, rng=rng)
@@ -321,14 +329,7 @@ def pair_up(
             f"tries={n_tries:>10}, full tries={n_full_tries:>3}, best={solution.cost}"
         )
         costs.append(solution.cost)
-        if n_tries >= max_tries:
-            logger.info("Reached max tries (%d)", max_tries)
-            break
-        if n_tries_stable >= abort_after_stable:
-            logger.info(
-                "Reached stable tries (%d) after %d tries", abort_after_stable, n_tries
-            )
-            break
+    assert best_solution is not None
     return best_solution, PairUpStatistics(
         pd.DataFrame(costs),
         best=best_cost,
