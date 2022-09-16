@@ -2,6 +2,7 @@
 # PROJECT SPECIFIC IGNORES
 # =============================================================================
 
+docs/source/_autosummary/**
 notebooks/**
 *.csv
 *.pkl
