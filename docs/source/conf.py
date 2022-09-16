@@ -19,6 +19,7 @@ extensions.append("autoapi.extension")
 
 autoapi_type = "python"
 autoapi_dirs = ["../../src/meetupmatcher"]
+autoapi_ignore = ["*config_files*", "*templates*", "*test_data*"]
 
 templates_path = ["_templates"]
 exclude_patterns = []
