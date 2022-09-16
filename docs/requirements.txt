@@ -1,3 +1,4 @@
 sphinx-click
 sphinx_book_theme
+sphinx-autoapi
 git+https://github.com/klieret/meetup-matcher.git
