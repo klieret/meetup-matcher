@@ -140,7 +140,12 @@ def sample(
 
     availabilities = update_availabilities_with_mask(availabilities, mask).copy()
     av_sums: np.ndarray = np.sum(availabilities, axis=1)
-    lowest_availability = av_sums[av_sums > 0].min()
+    nonzero_av_mask = av_sums > 0
+    if not any(nonzero_av_mask):
+        raise IncompatibleAvailabilities(
+            "Only zero availabilities left, cannot assign people to group"
+        )
+    lowest_availability = av_sums[nonzero_av_mask].min()
     idx_lowest_availabilities = (av_sums == lowest_availability).nonzero()[0]
     idx_first_person = rng.choice(idx_lowest_availabilities)
     assert mask[idx_first_person]
@@ -275,13 +280,15 @@ class PairUpStatistics:
 def pair_up(
     sn: SolutionNumbers,
     idx: np.ndarray,
-    notwo: np.ndarray,
+    notwo: np.ndarray | None = None,
     availabilities: np.ndarray | None = None,
     *,
     max_tries=1000_000,
     abort_after_stable=100_000,
     rng: np.random.Generator | None = None,
 ) -> tuple[PairUpResult, PairUpStatistics]:
+    if notwo is None:
+        notwo = np.full_like(idx, False)
     if availabilities is None:
         max_tries = 1
         availabilities = np.full((len(idx), 1), 1)

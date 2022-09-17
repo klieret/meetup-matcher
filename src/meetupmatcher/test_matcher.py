@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import numpy as np
+import pytest
 from pytest import raises
 
 from meetupmatcher.matcher import (
@@ -54,3 +55,13 @@ def test_pair_up():
     )
     assert r.segmentation == [{0, 1}, {2, 3, 4}]
     assert r.removed == set()
+
+
+def test_pair_up_no_solution():
+    with pytest.raises(NoSolution):
+        r, _ = pair_up(
+            SolutionNumbers(partitions=(1, 1, 0), removed=0),
+            np.arange(5),
+            availabilities=np.full((5, 1), False),
+            rng=np.random.RandomState(0),
+        )
