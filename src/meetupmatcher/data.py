@@ -29,15 +29,19 @@ class People:
         if "notwo_truthy" in config:
             df.notwo = df.notwo == config["notwo_truthy"]
         if "message" not in df.columns:
+            logger.warning("No message column found.")
             df["message"] = ""
         df.message = df.message.fillna("")
         df.message = df.message.str.strip()
         if "name" not in df.columns:
+            logger.warning("No name column found, substituting email")
             df["name"] = df.email.apply(lambda x: x.split("@")[0])
         if "slack" not in df.columns:
+            logger.warning("No slack column found.")
             df["slack"] = ""
         df.slack = df.slack.fillna("")
         if "notwo" not in df.columns:
+            logger.warning("Did not poll for two-person veto.")
             df["notwo"] = False
         else:
             df.notwo = df.notwo.fillna(False)
