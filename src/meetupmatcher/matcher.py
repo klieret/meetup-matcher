@@ -330,7 +330,11 @@ def pair_up(
         costs.append(solution.cost)
     elapsed = timeit.default_timer() - t
     logger.info(f"Searched for {elapsed:,} seconds.")
-    assert best_solution is not None
+    if best_solution is None:
+        raise NoSolution(
+            "No solution could be found. You might have to manually remove a "
+            "participant"
+        )
     return best_solution, PairUpStatistics(
         pd.DataFrame(costs),
         best=best_cost,
