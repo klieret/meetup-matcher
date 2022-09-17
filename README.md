@@ -15,12 +15,14 @@
 [![Black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/python/black)
 
 A script to facilitate networking by matching people for meetups in small groups.
+Optimizing these groups in terms of overlapping schedules is a non-trivial matching problem.
+Currently in use by the Princeton Postdoc Council with more than 100 participants matched.
 
 Setting up a meetup works as follows:
 
-1. You obtain a list of email addresses of everyone interested, optionally together with availabilities and extra information
-2. You run this script to match groups of three people together and to send them an email
-3. Each group decides what to do, and where and when to meet on their own.
+1. Obtain a list of email addresses of everyone interested, optionally together with availabilities and extra information.
+2. Run this script to match groups of three people and to send them an email.
+3. Each group decides what to do on their own.
 
 ## Match-making
 
