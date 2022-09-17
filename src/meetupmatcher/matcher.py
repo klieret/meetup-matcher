@@ -177,11 +177,13 @@ def sample(
 
 @dataclass
 class PairUpResult:
+    """Concrete solution that matched people to groups"""
+
     #: List of groups given as sets of indices
     segmentation: list[set[int]]
     #: Indices of people that could not be assigned to a group
     removed: set[int]
-    # todo: doc
+    #: Value of the objective function
     cost: np.ndarray
     #: Join group availabilities as a boolean array of n_people x n_timeslots
     joint_availabilities: np.ndarray = None  # type: ignore
@@ -217,15 +219,15 @@ def _pair_up(
     *,
     rng: np.random.Generator | None = None,
 ) -> PairUpResult | None:
-    """
+    """Single trial of pairing up people.
 
     Args:
-        sn:
+        sn: SolutionNumbers, specifying the number of groups of each size
         idx:
-        notwo:
-        best_cost:
-        availabilities:
-        rng:
+        notwo: Boolean array: Who vetoes to be in a group of only two-people
+        best_cost: Minimal objective function so far
+        availabilities: Boolean array of n_people x n_timeslots
+        rng: Random number generator
 
     Returns:
         None if we abort early because the current solution is worse than the best
@@ -272,8 +274,14 @@ def _pair_up(
 
 @dataclasses.dataclass
 class PairUpStatistics:
+    """Statistics about the sampling process that optimizes the objective function"""
+
+    #: DataFrame containing the objective function values for each trial that was
+    #: built to the end
     df: pd.DataFrame
+    #: Best objective function value
     best: np.ndarray
+    #: Availabilities of the best solution
     solution_pair_avs: np.ndarray
 
 
@@ -287,6 +295,20 @@ def pair_up(
     abort_after_stable=100_000,
     rng: np.random.Generator | None = None,
 ) -> tuple[PairUpResult, PairUpStatistics]:
+    """Pair up people by optimizing the objective function over multiple trials.
+
+    Args:
+        sn: SolutionNumbers, specifying the number of groups of each size
+        idx: Indices of people to be paired up
+        notwo: Boolean array: Who vetoes to be in a group of only two-people
+        availabilities: Boolean array of n_people x n_timeslots
+        max_tries: Maximum number of trials
+        abort_after_stable: Abort after this many trials without improvement
+        rng: Random number generator
+
+    Returns:
+        PairUpResult, PairUpStatistics
+    """
     if notwo is None:
         notwo = np.full_like(idx, False)
     if availabilities is None:
