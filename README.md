@@ -6,8 +6,10 @@
 [![Documentation Status](https://readthedocs.org/projects/meetup-matcher/badge/?version=latest)](https://meetup-matcher.readthedocs.io/en/latest/?badge=latest)
 [![PR welcome](https://img.shields.io/badge/PR-Welcome-%23FF8300.svg)](https://git-scm.com/book/en/v2/GitHub-Contributing-to-a-Project)
 [![License](https://img.shields.io/github/license/klieret/meetup-matcher)](https://github.com/klieret/meetup-matcher/blob/master/LICENSE.txt)
+
 <!-- [![Documentation Status](https://readthedocs.org/projects/meetup-matcher/badge/?version=latest)](https://meetup-matcher.readthedocs.io/) -->
 <!-- [![Pypi status](https://badge.fury.io/py/meetup-matcher.svg)](https://pypi.org/project/meetup-matcher/) -->
+
 [![pre-commit.ci status](https://results.pre-commit.ci/badge/github/klieret/meetup-matcher/main.svg)](https://results.pre-commit.ci/latest/github/klieret/meetup-matcher/main)
 [![gh actions](https://github.com/klieret/meetup-matcher/actions/workflows/test.yaml/badge.svg)](https://github.com/klieret/meetup-matcher/actions)
 [![codecov](https://codecov.io/gh/klieret/meetup-matcher/branch/main/graph/badge.svg?token=3MKA387NOH)](https://codecov.io/gh/klieret/meetup-matcher)
@@ -48,7 +50,7 @@ Currently, the optimization is performed by sampling the possibility space with 
 
 To be precise, the weight from step 2 is currently chosen to be
 
-![weight formula](https://latex.codecogs.com/svg.image?p_k=\frac{\min(5,|\bigcap_{j\in&space;G\cup&space;\{k\}}A_j|)}{3&space;&plus;&space;|A_k|})
+![weight formula](<https://latex.codecogs.com/svg.image?p_k=\frac{\min(5,|\bigcap_{j\in&space;G\cup&space;{k}}A_j|)}{3&space;+&space;|A_k|}>)
 
 where G represents the indices of the already added group members and A denotes the availabilities as a set.
 The numbers 5 and 3 have been heuristically chosen.
@@ -97,6 +99,7 @@ Bug reports and pull requests are credited with the help of the [allcontributors
 <!-- markdownlint-disable -->
 <!-- markdownlint-restore -->
 <!-- prettier-ignore-end -->
+
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 <!--  -->
 <!-- This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome! -->
