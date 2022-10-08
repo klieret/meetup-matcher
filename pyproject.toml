@@ -1,4 +1,4 @@
 [tool.pytest.ini_options]
 minversion = "6.0"
-addopts = ["--cov=meetupmatcher", "-ra", "--showlocals", "--strict-markers", "--strict-config"]
+addopts = ["--cov=meetupmatcher", "-ra", "--showlocals", "--strict-markers", "--strict-config", "--cov-branch"]
 xfail_strict = true
