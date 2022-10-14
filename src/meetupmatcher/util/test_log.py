@@ -1,7 +1,13 @@
 from __future__ import annotations
 
-from meetupmatcher.util.log import logger
+import logging
+
+from meetupmatcher.util.log import get_logger, logger
 
 
 def test_logger():
     logger.info("Hello world")
+
+
+def test_get_logger():
+    assert isinstance(get_logger(), logging.Logger)
