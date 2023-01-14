@@ -58,7 +58,7 @@ class EmailGenerator:
             to=group.email.tolist(),
             subject="Coffee meetup: You have been matched to your group",
             content=template.render(
-                names=group.name.to_list(),
+                names=[n.strip() for n in group.name.to_list()],
                 people=group,
                 availabilities=availability_strs,
             ),
