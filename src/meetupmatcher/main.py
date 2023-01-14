@@ -66,7 +66,7 @@ def main(
     if matching_stats:
         with open(matching_stats, "wb") as f:
             pickle.dump(statistics, f)
-    logger.info(paired_up)
+    logger.debug(paired_up)
     mails = list(
         EmailGenerator(template_path=templates).generate_emails(people, paired_up)
     )
