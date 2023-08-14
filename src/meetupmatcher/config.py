@@ -17,8 +17,9 @@ _config_search_filenames = [
 
 
 def get_default_config_path() -> Path:
-    with resources.path("meetupmatcher.config_files", "default_config.yaml") as path:
-        return path
+    return (
+        Path(str(resources.files("meetupmatcher.config_files"))) / "default_config.yaml"
+    )
 
 
 def find_config(supplied_path: str | PurePath | None = None) -> Path:
